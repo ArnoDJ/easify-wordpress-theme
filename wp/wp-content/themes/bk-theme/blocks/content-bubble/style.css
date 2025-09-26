@@ -1,0 +1,159 @@
+/* ==========================================================
+   Bubble Base
+   ========================================================== */
+
+.wp-block-bk-theme-content-bubble {
+    background: var(--wp--preset--color--light-gray, #f0f2f0);
+    border-radius: var(--bubble-radius, var(--wp--custom--radius--xl, 36px));
+    padding: clamp(22px, 4vw, 48px);
+    overflow: hidden;
+    max-width: min(100%, var(--wp--style--global--content-size, 1200px));
+    position: relative;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .08);
+}
+
+/* Wide & Full alignment */
+.wp-block-bk-theme-content-bubble.alignwide {
+    max-width: var(--wp--style--global--wide-size, 1440px);
+}
+
+.wp-block-bk-theme-content-bubble.alignfull {
+    width: 100%;
+    max-width: none;
+}
+
+/* ==========================================================
+   Asymmetric Corners + Whitespace
+   ========================================================== */
+
+/* Rounded left side */
+.wp-block-bk-theme-content-bubble.is-round-left {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-left: clamp(16px, 4vw, 40px) !important;
+    /* ✅ keep whitespace */
+}
+
+/* Rounded right side */
+.wp-block-bk-theme-content-bubble.is-round-right {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-right: clamp(16px, 4vw, 40px) !important;
+    /* ✅ keep whitespace */
+}
+
+/* Rounded both sides */
+.wp-block-bk-theme-content-bubble.is-round-both {
+    margin-left: clamp(16px, 4vw, 40px) !important;
+    margin-right: clamp(16px, 4vw, 40px) !important;
+}
+
+/* Straight sides stay flush */
+.wp-block-bk-theme-content-bubble:not(.is-round-left):not(.is-round-both) {
+    margin-left: 0 !important;
+}
+
+.wp-block-bk-theme-content-bubble:not(.is-round-right):not(.is-round-both) {
+    margin-right: 0 !important;
+}
+
+/* ==========================================================
+   Allow Bleed Variation
+   ========================================================== */
+.wp-block-bk-theme-content-bubble.is-style-allow-bleed {
+    overflow: visible;
+    position: relative;
+    background: transparent;
+}
+
+.wp-block-bk-theme-content-bubble.is-style-allow-bleed::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .08);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.wp-block-bk-theme-content-bubble.is-style-allow-bleed>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================================
+   Layout Helpers
+   ========================================================== */
+.wp-block-bk-theme-content-bubble .wp-block-columns {
+    align-items: center;
+    gap: clamp(16px, 2.5vw, 32px);
+}
+
+.wp-block-bk-theme-content-bubble .wp-block-column>* {
+    max-width: 58ch;
+}
+
+/* ==========================================================
+   Flex Row Inside Bubble
+   ========================================================== */
+.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: clamp(20px, 4vw, 60px);
+}
+
+/* Text group */
+.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>.wp-block-group:first-child {
+    flex: 1 1 0;
+    min-width: 320px;
+    /* ✅ ensures text never collapses */
+}
+
+/* Image group */
+.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>figure.wp-block-image {
+    flex: 1 1 750px;
+    max-width: 750px;
+    min-width: 280px;
+}
+
+.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>figure.wp-block-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .15));
+}
+
+/* ==========================================================
+   Responsive Breakpoints
+   ========================================================== */
+
+/* Tablet and below → stack */
+@media (max-width: 1024px) {
+    .wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex {
+        flex-wrap: wrap;
+    }
+
+    .wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>.wp-block-group:first-child {
+        flex: 1 1 100%;
+        order: 1;
+        /* text first */
+    }
+
+    .wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>figure.wp-block-image {
+        flex: 1 1 100%;
+        max-width: 100%;
+        order: 2;
+        /* image second */
+    }
+}
+
+/* Mobile narrow */
+@media (max-width: 600px) {
+    .wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>figure.wp-block-image {
+        flex: 0 0 280px;
+        max-width: 280px;
+        margin-inline: auto;
+    }
+}

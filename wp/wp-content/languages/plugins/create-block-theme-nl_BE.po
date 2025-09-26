@@ -1,0 +1,43 @@
+# Translation of Plugins - Create Block Theme - Stable (latest release) in Dutch (Belgium)
+# This file is distributed under the same license as the Plugins - Create Block Theme - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2024-06-01 09:00:15+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: nl_BE\n"
+"Project-Id-Version: Plugins - Create Block Theme - Stable (latest release)\n"
+
+#. Plugin URI of the plugin
+#: create-block-theme.php
+msgid "https://wordpress.org/plugins/create-block-theme"
+msgstr "https://wordpress.org/plugins/create-block-theme"
+
+#. Author of the plugin
+#: create-block-theme.php
+msgid "WordPress.org"
+msgstr "WordPress.org"
+
+#. Author URI of the plugin
+#: create-block-theme.php build/plugin-sidebar.js:1 build/plugin-sidebar.js:10
+msgid "https://wordpress.org/"
+msgstr "https://wordpress.org/"
+
+#. Plugin Name of the plugin
+#: create-block-theme.php build/admin-landing-page.js:1
+#: build/plugin-sidebar.js:11
+msgid "Create Block Theme"
+msgstr "Create Block Theme"
+
+#. Description of the plugin
+#: create-block-theme.php
+msgid "Generates a block theme"
+msgstr "Genereert een blokthema"
+
+#: assets/boilerplate/theme.json
+msgctxt "Font family name"
+msgid "System Font"
+msgstr "Systeemlettertype"

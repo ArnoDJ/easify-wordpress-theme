@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.8/theme.json",
+  "settings": {
+    "color": {
+      "defaultPalette": false,
+      "custom": true,
+      "palette": [
+        { "name": "Yellow", "slug": "yellow", "color": "#fdbb30" },
+        { "name": "DarkBlue", "slug": "dark-blue", "color": "#135a70" },
+        { "name": "LightBlue", "slug": "light-blue", "color": "#80bdd9" },
+        { "name": "Medium", "slug": "medium-blue", "color": "#6fa8be" },
+        { "name": "White", "slug": "white", "color": "#ffffff" },
+        { "name": "Black", "slug": "black", "color": "#000000" },
+        { "name": "LightGray", "slug": "light-gray", "color": "#f0f2f0" },
+        { "name": "DarkGray", "slug": "dark-gray", "color": "#53ab98" }
+      ]
+    },
+    "appearanceTools": true,
+    "border": { "radius": true },
+    "layout": {
+      "contentSize": "1400px",
+      "wideSize": "1400px"
+    },
+    "spacing": {
+      "units": [ "%", "px", "em", "rem", "vh", "vw" ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "fontFamily": "'Saira', sans-serif",
+          "name": "Saira",
+          "slug": "saira"
+        }
+      ]
+    },
+    "custom": {
+      "radius": {
+        "s": "8px",
+        "m": "16px",
+        "l": "24px",
+        "xl": "36px",
+        "pill": "9999px"
+      }
+    }
+  },
+  "styles": {
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--saira)"
+    },
+    "blocks": {
+      "bk-theme/content-bubble": {
+        "border": {
+          "radius": "var(--wp--custom--radius--m)"
+        }
+      }
+    }
+  },
+  "templateParts": [
+    { "area": "header", "name": "header", "title": "Header" },
+    { "area": "footer", "name": "footer", "title": "Footer" }
+  ],
+  "version": 3
+}

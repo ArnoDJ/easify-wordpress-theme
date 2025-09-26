@@ -1,0 +1,294 @@
+/* ===================================== */
+/* HERO TYPOGRAPHY                       */
+/* ===================================== */
+
+/* TITLE — bigger, lighter, tighter line-height */
+.is-style-hero-title {
+    color: var(--wp--preset--color--dark-blue, #135a70);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: .3px;
+    font-size: 8rem;
+}
+
+/* Wins over has-*-font-size classes */
+h1.wp-block-heading.is-style-hero-title,
+h2.wp-block-heading.is-style-hero-title,
+h3.wp-block-heading.is-style-hero-title {
+    font-size: 6rem;
+    line-height: 1.05;
+}
+
+/* If the heading has an inline font-size (custom numeric), force it */
+.wp-block-heading.is-style-hero-title[style*="font-size"],
+.wp-block-heading.is-style-hero-title[class*="-font-size"] {
+    font-size: 6rem !important;
+}
+
+/* TAGLINE — light-blue, larger than body */
+.is-style-hero-lead {
+    color: var(--wp--preset--color--light-blue, #80bdd9);
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+/* BODY — a hair darker than default black */
+.is-style-hero-body {
+    color: rgba(0, 0, 0, .84);
+    line-height: 1.6;
+    font-size: clamp(1rem, .95rem + .28vw, 1.125rem);
+    margin: 0 0 1.25rem 0;
+}
+
+/* BUTTONS ROW — compact gap */
+.is-style-hero-buttons {
+    gap: .75rem;
+}
+
+/* ===================================== */
+/* CTA BUTTON FIX (arrow without orb)    */
+/* ===================================== */
+.is-style-hero-cta .wp-block-button__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+
+    padding: 0.9rem 2rem;
+    background: var(--wp--preset--color--yellow, #f99d1c);
+    color: var(--wp--preset--color--dark-blue, #135a70);
+
+    border: 0;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+    font-weight: 600;
+
+    font-size: clamp(0.9rem, 0.8rem + 0.3vw, 1.125rem);
+    white-space: nowrap;
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+/* Inline SVG arrow */
+.is-style-hero-cta .wp-block-button__link svg {
+    flex-shrink: 0;
+    width: 1.2em;
+    height: 1.2em;
+    fill: var(--wp--preset--color--dark-blue, #135a70);
+    /* ✅ arrow itself blue */
+    transition: fill 0.2s ease;
+    background: none;
+    /* ✅ remove orb */
+    padding: 0;
+    /* ✅ no extra padding */
+    border-radius: 0;
+    /* ✅ no circle */
+}
+
+/* Hover/focus */
+.is-style-hero-cta .wp-block-button__link:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+.is-style-hero-cta .wp-block-button__link:focus-visible {
+    outline: 2px solid var(--wp--preset--color--dark-blue, #135a70);
+    outline-offset: 4px;
+}
+
+.is-style-hero-cta .wp-block-button__link:hover svg,
+.is-style-hero-cta .wp-block-button__link:focus-visible svg {
+    fill: var(--wp--preset--color--white, #fff);
+    /* ✅ arrow turns white on hover */
+}
+
+
+/* ===================================== */
+/* IMAGE + ROW LAYOUT FIXES              */
+/* ===================================== */
+
+/* Bleed amount variable */
+:root {
+    --bk-bleed-y: clamp(24px, 6vw, 120px);
+    --bk-bleed-y-s: 40px;
+    --bk-bleed-y-m: 80px;
+    --bk-bleed-y-l: 120px;
+    --bk-bleed-x-s: 40px;
+    --bk-bleed-x-m: 80px;
+    --bk-bleed-x-l: 120px;
+}
+
+/* Generic bleed images */
+.wp-block-image.is-style-bk-bleed-up img,
+.wp-block-image.is-style-bk-bleed-down img,
+.wp-block-image.is-style-bk-bleed-both img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .15));
+}
+
+.wp-block-image.is-style-bk-bleed-up {
+    margin-top: calc(-1 * var(--bk-bleed-y));
+}
+
+.wp-block-image.is-style-bk-bleed-down {
+    margin-bottom: calc(-1 * var(--bk-bleed-y));
+}
+
+.wp-block-image.is-style-bk-bleed-both {
+    margin-top: calc(-1 * var(--bk-bleed-y));
+    margin-bottom: calc(-1 * var(--bk-bleed-y));
+}
+
+@media (max-width: 600px) {
+    .wp-block-image.hide-on-mobile {
+        display: none !important;
+    }
+}
+
+/* ===================================== */
+/* HERO ROW OUTSIDE BUBBLE               */
+/* ===================================== */
+.wp-block-group.is-layout-flex.is-style-hero-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: clamp(20px, 4vw, 60px);
+}
+
+/* Left column (text) */
+.wp-block-group.is-layout-flex.is-style-hero-row>.wp-block-column:first-child {
+    flex: 1 1 auto;
+    min-width: 320px;
+}
+
+/* Right column (image) */
+.wp-block-group.is-layout-flex.is-style-hero-row>.wp-block-column:last-child {
+    flex: 0 0 auto;
+    min-width: 400px;
+    max-width: 750px;
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+    .wp-block-group.is-layout-flex.is-style-hero-row {
+        flex-wrap: wrap;
+    }
+
+    .wp-block-group.is-layout-flex.is-style-hero-row>.wp-block-column:last-child {
+        flex: 0 0 280px;
+        max-width: 280px;
+        min-width: 0;
+        margin: 0 auto;
+    }
+}
+
+/* ===================================== */
+/* HERO ROW INSIDE BUBBLE                */
+/* ===================================== */
+.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: clamp(20px, 4vw, 60px);
+}
+
+/* Text group */
+.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>.wp-block-group:first-child {
+    flex: 1 1 auto;
+    min-width: 320px;
+}
+
+/* Image column */
+.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>figure.wp-block-image {
+    flex: 0 0 auto;
+    min-width: 400px;
+    max-width: 750px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex {
+        flex-wrap: wrap;
+    }
+
+    .wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>.wp-block-group:first-child {
+        flex: 1 1 100%;
+        order: 1;
+    }
+
+    .wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>figure.wp-block-image {
+        flex: 0 0 100%;
+        max-width: 100%;
+        min-width: 0;
+        margin-inline: auto;
+        order: 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>.wp-block-group:first-child,
+    .wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>figure.wp-block-image {
+        flex: 1 1 100%;
+        max-width: 100%;
+        min-width: 0;
+        margin: 0 auto;
+    }
+}
+
+/* ===================================== */
+/* BLEED HELPERS                         */
+/* ===================================== */
+.wp-block-image.bleed-up {
+    margin-top: calc(-1 * var(--bk-bleed-y-m));
+}
+
+.wp-block-image.bleed-down {
+    margin-bottom: calc(-1 * var(--bk-bleed-y-m));
+}
+
+.wp-block-image.bleed-left {
+    margin-left: calc(-1 * var(--bk-bleed-x-m));
+}
+
+.wp-block-image.bleed-right {
+    margin-right: calc(-1 * var(--bk-bleed-x-m));
+}
+
+.wp-block-image.bleed-s.bleed-up {
+    margin-top: calc(-1 * var(--bk-bleed-y-s));
+}
+
+.wp-block-image.bleed-s.bleed-down {
+    margin-bottom: calc(-1 * var(--bk-bleed-y-s));
+}
+
+.wp-block-image.bleed-s.bleed-left {
+    margin-left: calc(-1 * var(--bk-bleed-x-s));
+}
+
+.wp-block-image.bleed-s.bleed-right {
+    margin-right: calc(-1 * var(--bk-bleed-x-s));
+}
+
+.wp-block-image.bleed-l.bleed-up {
+    margin-top: calc(-1 * var(--bk-bleed-y-l));
+}
+
+.wp-block-image.bleed-l.bleed-down {
+    margin-bottom: calc(-1 * var(--bk-bleed-y-l));
+}
+
+.wp-block-image.bleed-l.bleed-left {
+    margin-left: calc(-1 * var(--bk-bleed-x-l));
+}
+
+.wp-block-image.bleed-l.bleed-right {
+    margin-right: calc(-1 * var(--bk-bleed-x-l));
+}

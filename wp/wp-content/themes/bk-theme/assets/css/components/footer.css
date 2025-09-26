@@ -1,0 +1,549 @@
+/* ===== Footer base (uses theme.json colors) ===== */
+.footer {
+    --c-bg: var(--wp--preset--color--light-blue);
+    --c-bg-mid: var(--wp--preset--color--medium-blue);
+    --c-accent: var(--wp--preset--color--dark-blue);
+    --c-deep: var(--wp--preset--color--dark-blue);
+    --c-text: var(--wp--preset--color--black);
+    --c-muted: var(--wp--preset--color--light-gray);
+    --c-white: var(--wp--preset--color--white);
+
+    color: var(--c-white);
+    background: var(--c-bg);
+    font-family: var(--wp--preset--font-family--saira), system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+
+    overflow-x: clip;
+    --wp--style--block-gap: 0px;
+}
+
+/* also zero any margin WP may have already applied between children */
+.footer>*+* {
+    margin-block-start: 0 !important;
+}
+
+/* Make sure inner padding never causes horizontal scroll */
+.footer,
+.footer * {
+    box-sizing: border-box;
+}
+
+.facebook {
+    color: var(--c-deep);
+}
+
+.footer__links-container {
+    display: flex;
+    flex-direction: row;
+    align-items: space-between;
+    flex-wrap: wrap;
+}
+
+/* ===== Width container that honors theme.json ===== */
+.footer__container {
+    width: 100%;
+    max-width: min(var(--wp--style--global--content-size, 1400px), 100%);
+    margin-inline: auto;
+    padding-inline: clamp(20px, 6vw, 80px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* ===== Top bar (now FLEX) ===== */
+.footer__top {
+    padding: 64px 0 40px;
+    color: var(--c-muted);
+}
+
+/* flex container for the columns + newsletter */
+.footer__top .footer__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    row-gap: 2rem;
+    column-gap: 2.5rem;
+    overflow-x: clip;
+}
+
+.footer__col:nth-of-type(2),
+.footer__col:nth-of-type(3),
+.footer__col:nth-of-type(4) {
+    /* three link columns ~0.6/0.6/0.8fr */
+    min-width: 180px;
+}
+
+/* ===== Brand block ===== */
+.footer__easify {
+    font-size: clamp(28px, 3.2vw, 40px);
+    letter-spacing: .5px;
+    color: var(--c-white);
+}
+
+/* drop the tagline so it lines up with the first row to the right */
+.footer__subtitle {
+    margin: 0;
+    /* was 4px */
+    opacity: .9;
+    color: var(--c-white);
+}
+
+.footer__bkconnect {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--c-white);
+    margin-bottom: 16px;
+}
+
+.connect-logo {
+    width: 150px;
+    margin-left: -10px;
+    height: 80;
+}
+
+.footer__bkconnect .bk-mark {
+    width: 42px;
+    height: 54px;
+}
+
+.bk-text {
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: .5px;
+    color: var(--c-white);
+}
+
+.bk-text--bk {
+    font-size: 26px;
+}
+
+.bk-text+.bk-text {
+    margin-top: 2px;
+    font-size: 18px;
+    opacity: .95;
+}
+
+.footer__socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.social {
+    width: 36px;
+    height: 36px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 8px;
+    color: var(--c-deep)
+}
+
+.social:hover {
+    transform: translateY(-2px);
+}
+
+.social svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* ===== Columns ===== */
+.footer__head {
+    text-transform: lowercase;
+    letter-spacing: .5px;
+    font-size: 20px;
+    color: var(--c-deep);
+    margin: 4px 0 12px;
+}
+
+.footer__addr {
+    font-style: normal;
+    font-size: 20px;
+    line-height: 1.8;
+    opacity: .95;
+    color: var(--c-white);
+}
+
+.footer__addr a {
+    color: var(--c-white);
+    text-decoration: none;
+}
+
+.footer__addr a:hover {
+    text-decoration: underline;
+}
+
+.footer__links {
+    list-style: none;
+    font-size: 20px;
+    padding: 0;
+    margin: 6px 0 0 0;
+}
+
+.footer__links li+li {
+    margin-top: 10px;
+}
+
+.footer__links a {
+    color: var(--c-white);
+    text-decoration: none;
+    opacity: .95;
+}
+
+.footer__links a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Newsletter: pill with curved button ===== */
+/* Default (tablet & down rules below) */
+.footer__newsletter {
+    /* make it a single flex item that can sit on its own wrapped row */
+    margin-left: auto;
+    /* on large screens it hugs the right edge */
+    order: 10;
+    /* keep after the columns */
+
+    display: flex;
+    align-items: stretch;
+    background: var(--c-white);
+    border-radius: 44px;
+    overflow: hidden;
+    /* clip children to capsule */
+    width: 100%;
+    max-width: 820px;
+    min-width: 0;
+    margin-top: 50px;
+}
+
+.footer__newsletter input {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: 0;
+    background: transparent;
+    padding: 22px 28px;
+    font-size: 15px;
+    color: var(--c-deep);
+}
+
+.footer__newsletter input::placeholder {
+    color: var(--wp--preset--color--dark-gray);
+}
+
+/* Curved/overlapping button for perfect join */
+.footer__newsletter button {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--c-accent);
+    color: var(--c-white);
+    border: 0;
+    padding: 0 10px;
+    /* height comes from input’s line-height */
+    border-radius: 44px;
+    /* round both sides */
+    margin-left: -44px;
+    /* overlap into the capsule so the join is curved */
+    font-weight: 700;
+    font-size: 10px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform .12s ease, opacity .2s ease, background .2s ease;
+}
+
+.footer__newsletter button:hover {
+    transform: translateY(-1px);
+    opacity: .95;
+}
+
+.footer__newsletter button svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* ===== Dock pill up & right on wide screens ===== */
+@media (min-width: 1280px) {
+    .footer__top .footer__container {
+        row-gap: 6px;
+        /* visually tighter rows vs the columns above */
+    }
+
+    .footer__newsletter {
+        /* nudge up to match the design */
+        will-change: transform;
+        max-width: 760px;
+        /* don’t get too long on huge screens */
+    }
+
+}
+
+/* ===== Mid strip ===== */
+.footer__mid {
+    background: var(--c-bg-mid);
+    padding: 16px 0;
+    color: var(--c-deep);
+    font-size: 20px;
+}
+
+.footer__mid .footer__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.footer__legal {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer__legal a {
+    color: var(--c-deep);
+    text-decoration: none;
+}
+
+.footer__legal a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Bottom brands ===== */
+.footer__bottom {
+    background: var(--c-deep);
+    padding: 28px 0 36px;
+}
+
+.footer__bottom .footer__container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 22px;
+    justify-content: center;
+    /* centered logos per design */
+}
+
+.brand-tile {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--c-muted);
+    text-decoration: none;
+    padding: 10px 4px;
+    border-radius: 12px;
+}
+
+.brand-tile:hover {
+    background: color-mix(in oklab, var(--c-white) 6%, transparent);
+}
+
+/* If you still show vector fallbacks */
+.brand-icon {
+    width: 42px;
+    height: 42px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 14px;
+}
+
+.brand-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke: currentColor;
+}
+
+.brand-label {
+    font-weight: 700;
+    letter-spacing: .4px;
+}
+
+/* map brand icon accent colors to theme palette */
+.brand-icon--group {
+    color: var(--wp--preset--color--light-gray);
+}
+
+.brand-icon--projecten {
+    color: var(--wp--preset--color--yellow);
+}
+
+.brand-icon--products {
+    color: var(--wp--preset--color--light-blue);
+}
+
+.brand-icon--connect {
+    color: var(--wp--preset--color--dark-gray);
+}
+
+.brand-icon--rental {
+    color: var(--wp--preset--color--yellow);
+}
+
+.divider {
+    width: 1px;
+    height: 40px;
+    background: color-mix(in oklab, var(--c-white) 15%, transparent);
+    margin: 0 6px;
+}
+
+
+/* If you’re using <img class="brand-logo"> instead of inline SVGs */
+.brand-logo {
+    height: 80px;
+    /* match icon height */
+    width: auto;
+    display: block;
+}
+
+.footer_info_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-grow: 1;
+    max-width: 600px;
+}
+
+@media (max-width: 750px) {
+    .footer_info_container {
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        flex-grow: 0;
+    }
+
+    .footer-col {
+        justify-content: space-between;
+    }
+
+}
+
+/* Here are the new styles */
+.footer__top {
+    display: flex;
+    padding: 64px 40px 40px;
+    flex-direction: column;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.footer_info_container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer__brand {
+    margin: 50px 50px;
+}
+
+.footer__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer__links-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer__links {
+    width: 100%;
+    text-align: center;
+    text-wrap: nowrap;
+}
+
+.footer__newsletter {
+    max-width: 600px;
+    margin-left: 0;
+}
+
+
+.footer__container {
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+@media (min-width: 500px) {
+    .footer__brand {
+        margin: 0;
+    }
+
+    .footer_info_container {
+        width: 100%;
+        max-width: none;
+        justify-content: space-evenly;
+    }
+}
+
+@media (min-width: 1000px) {
+    .footer__top {
+        flex-direction: row;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .footer_info_container {
+        width: 50%;
+        justify-content: space-between;
+    }
+
+    .footer__links-container {
+        flex-direction: row;
+    }
+
+    .footer__links {
+        width: 100%;
+        text-align: start;
+        text-wrap: nowrap;
+        min-width: 200px;
+    }
+
+    .footer__nav {
+        width: 50%;
+        align-items: center;
+        justify-content: flex-start;
+        max-width: 750px;
+    }
+
+    .footer__newsletter button {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--c-accent);
+        color: var(--c-white);
+        border: 0;
+        padding: 0 34px;
+        /* height comes from input’s line-height */
+        border-radius: 44px;
+        /* round both sides */
+        margin-left: -44px;
+        /* overlap into the capsule so the join is curved */
+        font-weight: 700;
+        font-size: 20px;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: transform .12s ease, opacity .2s ease, background .2s ease;
+    }
+
+    .footer__newsletter input {
+        flex: 1 1 auto;
+        min-width: 0;
+        border: 0;
+        background: transparent;
+        padding: 22px 28px;
+        font-size: 20px;
+        color: var(--c-deep);
+    }
+
+    .footer__add {
+        margin-right: 100px;
+    }
+}

@@ -1,0 +1,47 @@
+/* ===================================== */
+/* HEADER CTA BUTTON                     */
+/* ===================================== */
+
+.bk-topbar .bk-cta-wrap .wp-block-button__link,
+.bk-header-main .bk-cta-wrap .wp-block-button__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+
+    padding: 0.6rem 1.6rem;
+    background: var(--wp--preset--color--light-blue, #80bdd9) !important;
+    color: var(--wp--preset--color--white, #ffffff) !important;
+
+    border: 0;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    white-space: nowrap;
+
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+/* Add trailing arrow (blue, no orb) */
+.bk-topbar .bk-cta-wrap .wp-block-button__link::after,
+.bk-header-main .bk-cta-wrap .wp-block-button__link::after {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23135a70' viewBox='0 0 512 512'><path d='M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z'/></svg>");
+}
+
+/* Hover/focus states */
+.bk-topbar .bk-cta-wrap .wp-block-button__link:hover,
+.bk-header-main .bk-cta-wrap .wp-block-button__link:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+.bk-topbar .bk-cta-wrap .wp-block-button__link:focus-visible,
+.bk-header-main .bk-cta-wrap .wp-block-button__link:focus-visible {
+    outline: 2px solid var(--wp--preset--color--white, #ffffff);
+    outline-offset: 4px;
+}

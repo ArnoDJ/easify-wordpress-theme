@@ -1,0 +1,8 @@
+@layer base, layout, components, utilities;
+
+@import url("./base.css") layer(base);
+@import url("./layout.css") layer(layout);
+@import url("./components/header.css") layer(components);
+@import url("./components/footer.css") layer(components);
+@import url("./utilities.css") layer(utilities);
+@import url("./editor.css") layer(editor)

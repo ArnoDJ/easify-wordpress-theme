@@ -1,0 +1,71 @@
+<!-- TOP TEAL BAR (full-bleed) -->
+<!-- wp:group {"align":"full","className":"bk-topbar","style":{"spacing":{"padding":{"top":"10px","bottom":"10px"}}},"backgroundColor":"dark-blue","textColor":"white","layout":{"type":"flow"}} -->
+<div class="wp-block-group alignfull bk-topbar has-white-color has-dark-blue-background-color has-text-color has-background" style="padding-top:10px;padding-bottom:10px;">
+
+  <!-- wp:group {"className":"container","layout":{"type":"flex","justifyContent":"right","flexWrap":"nowrap","verticalAlignment":"center"}} -->
+  <div class="wp-block-group container is-layout-flex">
+
+    <!-- Language switcher (Polylang free via shortcode) -->
+    <!-- wp:shortcode -->
+    [polylang_switcher display_names_as="slug" show_names="1" show_flags="0" hide_current="1" hide_if_no_translation="0" force_home="1"]
+    <!-- /wp:shortcode -->
+
+    <!-- CTA copy for tablet/mobile (shown ≤1200px via CSS) -->
+    <!-- wp:buttons {"className":"bk-cta-wrap"} -->
+    <div class="wp-block-buttons bk-cta-wrap">
+      <!-- wp:button {"backgroundColor":"light-blue","textColor":"dark-blue","className":"is-style-fill","style":{"border":{"radius":"999px"},"spacing":{"padding":{"top":"12px","bottom":"12px","left":"24px","right":"24px"}}}} -->
+      <div class="wp-block-button is-style-fill">
+        <a class="wp-block-button__link has-dark-blue-color has-light-blue-background-color has-text-color has-background wp-element-button" style="border-radius:999px;padding-top:12px;padding-right:24px;padding-bottom:12px;padding-left:24px">DEMO AANVRAGEN</a>
+      </div>
+      <!-- /wp:button -->
+    </div>
+    <!-- /wp:buttons -->
+
+    <!-- Topbar nav = hamburger (overlay on mobile) -->
+    <!-- wp:navigation {"ref":7,"overlayMenu":"mobile","layout":{"type":"flex","justifyContent":"right","orientation":"horizontal"}} /-->
+
+  </div>
+  <!-- /wp:group -->
+</div>
+<!-- /wp:group -->
+
+<!-- MAIN HEADER ROW -->
+<!-- wp:group {"className":"bk-header-main","layout":{"type":"constrained"}} -->
+<div class="wp-block-group bk-header-main">
+
+  <!-- wp:group {"className":"container is-layout-flex","layout":{"type":"flex","justifyContent":"space-between","flexWrap":"nowrap","verticalAlignment":"center"}} -->
+  <div class="wp-block-group container is-layout-flex">
+
+    <!-- Brand badge / logo overlapping the teal bar -->
+    <!-- wp:group {"className":"brand-badge","backgroundColor":"light-blue","style":{"spacing":{"padding":{"top":"12px","bottom":"12px","left":"12px","right":"12px"}}},"layout":{"type":"constrained"}} -->
+    <div class="wp-block-group brand-badge has-light-blue-background-color has-background" style="padding-top:12px;padding-right:12px;padding-bottom:12px;padding-left:12px">
+      <!-- wp:site-logo {"width":64} /-->
+    </div>
+    <!-- /wp:group -->
+
+    <!-- Site title -->
+    <!-- wp:group {"style":{"spacing":{"margin":{"left":"16px"}}},"layout":{"type":"flow"}} -->
+    <div class="wp-block-group" style="margin-left:16px">
+      <!-- wp:site-title {"level":3} /-->
+    </div>
+    <!-- /wp:group -->
+
+    <!-- Centered primary nav (never turns into overlay) -->
+    <!-- wp:navigation {"ref":51,"overlayMenu":"never","className":"grow center","textColor":"dark-blue","style":{"typography":{"fontWeight":"600","letterSpacing":"0.02em"},"spacing":{"blockGap":"var:preset|spacing|70"}},"fontSize":"medium","layout":{"type":"flex","justifyContent":"center","orientation":"horizontal","flexWrap":"nowrap"}} /-->
+
+    <!-- Desktop CTA (hidden ≤1200px via CSS) -->
+    <!-- wp:buttons {"className":"bk-cta-wrap"} -->
+    <div class="wp-block-buttons bk-cta-wrap">
+      <!-- wp:button {"backgroundColor":"light-blue","textColor":"dark-blue","className":"is-style-fill","style":{"border":{"radius":"999px"},"spacing":{"padding":{"top":"12px","bottom":"12px","left":"24px","right":"24px"}}}} -->
+      <div class="wp-block-button is-style-fill">
+        <a class="wp-block-button__link has-dark-blue-color has-light-blue-background-color has-text-color has-background wp-element-button" style="border-radius:999px;padding-top:12px;padding-right:24px;padding-bottom:12px;padding-left:24px">DEMO AANVRAGEN</a>
+      </div>
+      <!-- /wp:button -->
+    </div>
+    <!-- /wp:buttons -->
+
+  </div>
+  <!-- /wp:group -->
+
+</div>
+<!-- /wp:group -->

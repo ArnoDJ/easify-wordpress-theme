@@ -1,0 +1,402 @@
+/*
+bk-theme — mobile topbar hamburger (clean)
+*/
+
+/* ====== Base ====== */
+:root {
+    --container: var(--wp--style--global--wide-size, 1400px);
+    --container-pad: 20px;
+    --adminbar-h: 46px;
+}
+
+.container {
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--container-pad);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.grow {
+    flex: 1 1 auto;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+/* ====== Top bar ====== */
+.bk-topbar.alignfull {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-block: 6px !important;
+    margin-bottom: 0 !important;
+}
+
+.bk-topbar>.container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0 !important;
+    padding-top: 40px;
+    /* desktop spacing; overridden on mobile */
+}
+
+.bk-topbar nav.wp-block-navigation {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+
+/* ====== Header row ====== */
+.bk-header-main {
+    padding-top: 36px;
+}
+
+.brand-badge {
+    align-self: flex-start;
+    position: relative;
+    z-index: 2;
+    margin-top: -140px !important;
+    height: 180px;
+    padding: 8px 12px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 0 24px 24px;
+}
+
+.bk-lang {
+    list-style-type: none;
+    margin-right: 20px !important;
+    margin-left: 40px !important;
+    display: flex;
+    text-align: center;
+    margin-top: 0;
+}
+
+.bk-topbar .bk-lang a,
+.bk-topbar .bk-lang a:link,
+.bk-topbar .bk-lang a:visited {
+    color: var(--wp--preset--color--light-blue) !important;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.bk-cta-link {
+    background: var(--wp--preset--color--light-blue) !important;
+}
+
+/* --- CORE MOBILE NAV (≤1100px) --- */
+@media (max-width:1100px) {
+
+    /* keep the top bar tidy */
+    .bk-topbar>.container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 8px;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: 56px !important;
+    }
+
+    /* use TOPBAR nav (ref:7) as the hamburger, left of "nl" */
+    .bk-topbar nav.wp-block-navigation {
+        order: 1;
+        display: flex !important;
+        align-items: center;
+    }
+
+    .bk-topbar .wp-block-shortcode {
+        order: 2;
+        display: flex;
+        align-items: center;
+    }
+
+    /* show only the trigger; kill inline list + bullets */
+    .bk-topbar nav ul,
+    .bk-topbar nav li {
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .bk-topbar .wp-block-navigation__container {
+        display: none !important;
+    }
+
+    /* make the button a white SVG burger */
+    .bk-topbar .wp-block-navigation__responsive-container-open {
+        display: inline-flex !important;
+        color: #fff !important;
+        background: none !important;
+        border: 0 !important;
+        padding: 0 !important;
+        line-height: 1;
+    }
+
+    .bk-topbar .wp-block-navigation__responsive-container-open svg {
+        display: block !important;
+        width: 28px;
+        height: 28px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+    }
+
+    /* hide the HEADER nav on mobile so you don’t get two menus */
+    .bk-header-main nav.wp-block-navigation {
+        margin-top: -75px !important;
+    }
+
+    /* overlay colors */
+    .wp-block-navigation__responsive-container {
+        background: var(--wp--preset--color--dark-blue) !important;
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container .wp-block-navigation-item a {
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container-close {
+        color: #fff !important;
+    }
+
+    /* Make the top bar a proper row & a positioning context */
+    .bk-topbar>.container {
+        position: relative;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 10px;
+        height: 56px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* 1) Desktop topbar nav goes away on mobile */
+    .bk-topbar .topbar-nav {
+        display: none !important;
+    }
+
+    /* 2) Use the HEADER nav as the hamburger */
+    /* Place its button inside the top bar, to the left of "nl" */
+    .bk-header-main .header-nav {
+        position: absolute !important;
+        top: 50% !important;
+        right: calc(var(--container-pad) + 24px) !important;
+        /* just left of language */
+        transform: translateY(-50%) !important;
+        display: inline-flex !important;
+        align-items: center;
+        margin: 0 !important;
+        z-index: 5;
+    }
+
+    .bk-header-main .header-nav:not(.is-menu-open) .wp-block-navigation__container {
+        display: none !important;
+    }
+
+    /* When the overlay is open, make sure the list shows vertically */
+    .bk-header-main .header-nav.is-menu-open .wp-block-navigation__responsive-container .wp-block-navigation__container {
+        display: flex !important;
+        flex-direction: column;
+        row-gap: 12px;
+        /* tweak to taste */
+    }
+
+    /* Make the hamburger white and visible */
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container-open {
+        display: inline-flex !important;
+        color: #fff !important;
+        background: none !important;
+        border: 0 !important;
+        padding: 0 !important;
+        line-height: 1;
+    }
+
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container-open svg {
+        display: block !important;
+        width: 28px;
+        height: 28px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+    }
+
+    /* Keep the language link styled */
+    .bk-topbar .bk-lang a,
+    .bk-topbar .bk-lang a:link,
+    .bk-topbar .bk-lang a:visited {
+        color: var(--wp--preset--color--light-blue) !important;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    /* Overlay menu colors */
+    .wp-block-navigation__responsive-container {
+        background-color: var(--wp--preset--color--dark-blue) !important;
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container .wp-block-navigation-item a {
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container-close {
+        color: #fff !important;
+    }
+
+    /* make the top bar a tidy row and leave room for the fixed button */
+    .bk-topbar>.container {
+        position: relative;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 10px;
+        height: 56px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        padding-right: calc(var(--container-pad) + 44px) !important;
+        /* space for the fixed button */
+    }
+
+    /* reset header nav so WP can manage overlay normally */
+    .bk-header-main .header-nav {
+        position: static !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+
+    /* >>> Pin the OPEN BUTTON into the top bar, right of screen (left of "nl") */
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container-open {
+        position: fixed !important;
+        top: 18px !important;
+        /* visually centered in 56px */
+        right: calc(var(--container-pad) + 24px) !important;
+        z-index: 10001 !important;
+
+        display: inline-flex !important;
+        color: #fff !important;
+        /* white icon */
+        background: none !important;
+        border: 0 !important;
+        padding: 0 !important;
+        line-height: 1;
+    }
+
+    .admin-bar .bk-header-main .header-nav .wp-block-navigation__responsive-container-open {
+        top: calc(18px + var(--adminbar-h)) !important;
+    }
+
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container-open svg {
+        display: block !important;
+        width: 28px;
+        height: 28px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+    }
+
+    /* overlay colors only (don’t change its positioning!) */
+    .wp-block-navigation__responsive-container {
+        background-color: var(--wp--preset--color--dark-blue) !important;
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container .wp-block-navigation-item a {
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container-close {
+        color: #fff !important;
+    }
+
+    /* Undo any previous blanket hides/unsets */
+    .bk-header-main .header-nav .wp-block-navigation__container {
+        display: flex;
+        /* default for overlay */
+        flex-wrap: nowrap;
+    }
+
+    /* When open, make sure the overlay’s container is visible */
+    .bk-header-main .header-nav.is-menu-open .wp-block-navigation__responsive-container .wp-block-navigation__container {
+        display: flex !important;
+        flex-direction: column;
+        /* vertical list in overlay */
+    }
+
+    /* hide the inline list by default (closed state) */
+    .bk-header-main .header-nav .wp-block-navigation__container {
+        display: none !important;
+    }
+
+    /* WP adds is-menu-open on the RESPONSIVE CONTAINER (dialog) */
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container {
+        display: flex !important;
+        flex-direction: column;
+        row-gap: 12px;
+        /* tweak if you like */
+    }
+
+    /* Don't reserve space on the right; let "nl" hug the edge */
+    .bk-topbar>.container {
+        padding-right: 0 !important;
+    }
+
+    /* Put the burger just to the LEFT of "nl" */
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container-open {
+        right: calc(var(--container-pad) + 40px) !important;
+        top: 21px !important;
+        /* adjust 40px to taste */
+        z-index: 10001 !important;
+    }
+}
+
+/* ===================================== */
+/* HEADER CTA BUTTON                     */
+/* ===================================== */
+header .wp-block-button.is-style-hero-cta .wp-block-button__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+
+    padding: 0.6rem 1.6rem;
+    background: var(--wp--preset--color--yellow, #f99d1c);
+    color: var(--wp--preset--color--dark-blue, #135a70);
+
+    border: 0;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .06);
+
+    transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+/* Add trailing arrow using SVG */
+header .wp-block-button.is-style-hero-cta .wp-block-button__link::after {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23135a70' viewBox='0 0 512 512'><path d='M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z'/></svg>");
+}
+
+/* Hover/focus states */
+header .wp-block-button.is-style-hero-cta .wp-block-button__link:hover {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+header .wp-block-button.is-style-hero-cta .wp-block-button__link:focus-visible {
+    outline: 2px solid var(--wp--preset--color--dark-blue, #135a70);
+    outline-offset: 4px;
+}

@@ -1,0 +1,10 @@
+:root {
+    --container: var(--wp--style--global--wide-size, 1000px);
+    --container-pad: 20px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box
+}
