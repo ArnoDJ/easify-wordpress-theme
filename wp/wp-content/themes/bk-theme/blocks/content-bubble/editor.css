@@ -1,3 +1,33 @@
-.wp-block-yourtheme-content-bubble {
+/* ==========================================================
+   Content Bubble — Editor Styles
+   ========================================================== */
+
+.editor-styles-wrapper .wp-block-bk-theme-content-bubble {
     outline: 1px dashed rgba(0, 0, 0, .05);
+    position: relative;
+}
+
+/* ==========================================================
+   Bubble Bleed — Editor Preview
+   ========================================================== */
+
+/* Right */
+.editor-styles-wrapper .wp-block-bk-theme-content-bubble.is-style-bubble-bleed-right {
+    width: calc(100% + 200px) !important;
+    margin-right: -200px !important;
+    max-width: none !important;
+}
+
+/* Left */
+.editor-styles-wrapper .wp-block-bk-theme-content-bubble.is-style-bubble-bleed-left {
+    width: calc(100% + 200px) !important;
+    margin-left: -200px !important;
+    max-width: none !important;
+}
+
+/* Both */
+.editor-styles-wrapper .wp-block-bk-theme-content-bubble.is-style-bubble-bleed-both {
+    width: calc(100% + 400px) !important;
+    margin-inline: -200px !important;
+    max-width: none !important;
 }

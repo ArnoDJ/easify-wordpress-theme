@@ -181,3 +181,23 @@ addFilter('blocks.getSaveContent.extraProps', 'bk-theme/apply-hero-cta-arrow', (
     return extraProps;
 });
 
+wp.domReady(() => {
+  wp.data.subscribe(() => {
+    const blocks = wp.data.select('core/block-editor').getBlocks();
+    blocks.forEach(block => {
+      if (block.name === 'bk-theme/content-bubble') {
+        const hasBleedImage = block.innerBlocks.some(
+          child => child.name === 'core/image' &&
+                   child.attributes.className &&
+                   child.attributes.className.includes('is-style-bleed-')
+        );
+        const el = document.querySelector(
+          `[data-block="${block.clientId}"]`
+        );
+        if (el) {
+          el.classList.toggle('has-image-bleed', hasBleedImage);
+        }
+      }
+    });
+  });
+});

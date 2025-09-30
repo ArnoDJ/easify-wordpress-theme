@@ -1,0 +1,10 @@
+/* Only inside editor */
+.bk-svg-icon {
+    border: 1px dashed rgba(0, 0, 0, 0.1);
+    padding: 8px;
+}
+
+.bk-svg-icon svg {
+    max-height: 80px;
+    object-fit: contain;
+}

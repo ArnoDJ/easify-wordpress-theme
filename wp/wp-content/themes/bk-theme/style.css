@@ -28,10 +28,8 @@ bk-theme — mobile topbar hamburger (clean)
 
 /* ====== Top bar ====== */
 .bk-topbar.alignfull {
-    width: 100vw;
-    max-width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    width: 100%;
+    max-width: 100%;
     padding-block: 6px !important;
     margin-bottom: 0 !important;
 }
@@ -358,45 +356,37 @@ bk-theme — mobile topbar hamburger (clean)
     }
 }
 
-/* ===================================== */
-/* HEADER CTA BUTTON                     */
-/* ===================================== */
-header .wp-block-button.is-style-hero-cta .wp-block-button__link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-
-    padding: 0.6rem 1.6rem;
-    background: var(--wp--preset--color--yellow, #f99d1c);
-    color: var(--wp--preset--color--dark-blue, #135a70);
-
-    border: 0;
-    border-radius: 9999px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, .06);
-
-    transition: filter 0.2s ease, transform 0.2s ease;
+/* Kill horizontal scrollbars from bleed */
+body {
+    overflow-x: hidden;
 }
 
-/* Add trailing arrow using SVG */
-header .wp-block-button.is-style-hero-cta .wp-block-button__link::after {
-    content: '';
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    background: no-repeat center/contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23135a70' viewBox='0 0 512 512'><path d='M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z'/></svg>");
+/* Ensure bubble doesn’t enforce wider than viewport */
+.wp-block-bk-theme-content-bubble {
+    max-width: 100%;
+    overflow: visible;
+    position: relative;
 }
 
-/* Hover/focus states */
-header .wp-block-button.is-style-hero-cta .wp-block-button__link:hover {
-    filter: brightness(0.95);
-    transform: translateY(-1px);
+/* Figures: let them bleed visually but never cause layout overflow */
+.wp-block-bk-theme-content-bubble figure.wp-block-image {
+    max-width: calc(100% + 400px);
+    /* allow bleed space */
+    position: relative;
 }
 
-header .wp-block-button.is-style-hero-cta .wp-block-button__link:focus-visible {
-    outline: 2px solid var(--wp--preset--color--dark-blue, #135a70);
-    outline-offset: 4px;
+/* Images scale correctly inside figures */
+.wp-block-bk-theme-content-bubble figure.wp-block-image img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Mobile: disable bleeds to avoid squished layouts */
+@media (max-width: 1024px) {
+    .wp-block-bk-theme-content-bubble .wp-block-image[class*="bleed-"] {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        max-width: 100% !important;
+    }
 }

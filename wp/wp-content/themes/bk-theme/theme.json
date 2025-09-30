@@ -8,6 +8,7 @@
         { "name": "Yellow", "slug": "yellow", "color": "#fdbb30" },
         { "name": "DarkBlue", "slug": "dark-blue", "color": "#135a70" },
         { "name": "LightBlue", "slug": "light-blue", "color": "#80bdd9" },
+        { "name": "VeryLighBlue", "slug": "very-light-blue", "color": "#e8f3f8"},
         { "name": "Medium", "slug": "medium-blue", "color": "#6fa8be" },
         { "name": "White", "slug": "white", "color": "#ffffff" },
         { "name": "Black", "slug": "black", "color": "#000000" },

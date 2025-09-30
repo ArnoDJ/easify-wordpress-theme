@@ -1,20 +1,28 @@
 (function (wp) {
-  const { registerBlockType } = wp.blocks;
+  const { registerBlockType, registerBlockStyle } = wp.blocks;
   const { __ } = wp.i18n;
   const { useBlockProps, InnerBlocks, InspectorControls } = wp.blockEditor || wp.editor;
-  const { PanelBody, SelectControl } = wp.components;
+  const { PanelBody, SelectControl, ToggleControl } = wp.components;
   const UnitControl = wp.components.__experimentalUnitControl || wp.components.UnitControl;
 
   registerBlockType('bk-theme/content-bubble', {
+    attributes: {
+      radiusChoice: { type: 'string', default: 'm' },
+      roundSide: { type: 'string', default: 'both' },
+      gapSide: { type: 'string', default: 'none' },
+      gapSize: { type: 'string', default: '' },
+      equalHeight: { type: 'boolean', default: false },
+      imageLeft: { type: 'boolean', default: false },
+    },
+
     edit: ({ attributes, setAttributes }) => {
-      const radiusChoice = attributes.radiusChoice || 'm';
-      const roundSide    = attributes.roundSide || 'both';
-      const gapSide      = attributes.gapSide || 'none';
-      const gapSize      = attributes.gapSize || '';
+      const { radiusChoice, roundSide, gapSide, gapSize, equalHeight, imageLeft } = attributes;
 
       const className = [
         'is-round-' + roundSide,
-        gapSide !== 'none' ? ('is-gap-' + gapSide) : ''
+        gapSide !== 'none' ? ('is-gap-' + gapSide) : '',
+        equalHeight ? 'is-equal-height' : '',
+        imageLeft ? 'is-image-left' : ''
       ].filter(Boolean).join(' ');
 
       const blockProps = useBlockProps({
@@ -32,7 +40,8 @@
           InspectorControls,
           null,
           wp.element.createElement(
-            PanelBody, { title: __('Corners & Gap', 'bk-theme'), initialOpen: true },
+            PanelBody,
+            { title: __('Corners & Gap', 'bk-theme'), initialOpen: true },
             wp.element.createElement(SelectControl, {
               label: __('Rounded side', 'bk-theme'),
               value: roundSide,
@@ -66,30 +75,45 @@
               ],
               onChange: (v) => setAttributes({ gapSide: v })
             }),
-            gapSide !== 'none' && wp.element.createElement(UnitControl, {
-              label: __('Whitespace size', 'bk-theme'),
-              value: gapSize,
-              onChange: (v) => setAttributes({ gapSize: v }),
-              units: [{value:'px',label:'px'},{value:'rem',label:'rem'},{value:'%',label:'%'}]
+            gapSide !== 'none' &&
+              wp.element.createElement(UnitControl, {
+                label: __('Whitespace size', 'bk-theme'),
+                value: gapSize,
+                onChange: (v) => setAttributes({ gapSize: v }),
+                units: [
+                  { value: 'px', label: 'px' },
+                  { value: 'rem', label: 'rem' },
+                  { value: '%', label: '%' }
+                ]
+              })
+          ),
+          wp.element.createElement(
+            PanelBody,
+            { title: __('Layout Options', 'bk-theme'), initialOpen: false },
+            wp.element.createElement(ToggleControl, {
+              label: __('Equal Height', 'bk-theme'),
+              checked: equalHeight,
+              onChange: (v) => setAttributes({ equalHeight: v })
+            }),
+            wp.element.createElement(ToggleControl, {
+              label: __('Image Left (reverse layout)', 'bk-theme'),
+              checked: imageLeft,
+              onChange: (v) => setAttributes({ imageLeft: v })
             })
           )
         ),
-        // EMPTY container – user can add anything
-        wp.element.createElement('div', blockProps,
-          wp.element.createElement(InnerBlocks, null)
-        )
+        wp.element.createElement('div', blockProps, wp.element.createElement(InnerBlocks, null))
       );
     },
 
     save: ({ attributes }) => {
-      const radiusChoice = attributes.radiusChoice || 'm';
-      const roundSide    = attributes.roundSide || 'both';
-      const gapSide      = attributes.gapSide || 'none';
-      const gapSize      = attributes.gapSize || '';
+      const { radiusChoice, roundSide, gapSide, gapSize, equalHeight, imageLeft } = attributes;
 
       const className = [
         'is-round-' + roundSide,
-        gapSide !== 'none' ? ('is-gap-' + gapSide) : ''
+        gapSide !== 'none' ? ('is-gap-' + gapSide) : '',
+        equalHeight ? 'is-equal-height' : '',
+        imageLeft ? 'is-image-left' : ''
       ].filter(Boolean).join(' ');
 
       const blockProps = (wp.blockEditor || wp.editor).useBlockProps.save({
@@ -100,9 +124,25 @@
         }
       });
 
-      return wp.element.createElement('div', blockProps,
+      return wp.element.createElement(
+        'div',
+        blockProps,
         wp.element.createElement((wp.blockEditor || wp.editor).InnerBlocks.Content)
       );
     }
+  });
+
+  // Bubble bleed stays as block styles (mutually exclusive)
+  registerBlockStyle('bk-theme/content-bubble', {
+    name: 'bubble-bleed-right',
+    label: 'Bubble Bleed Right',
+  });
+  registerBlockStyle('bk-theme/content-bubble', {
+    name: 'bubble-bleed-left',
+    label: 'Bubble Bleed Left',
+  });
+  registerBlockStyle('bk-theme/content-bubble', {
+    name: 'bubble-bleed-both',
+    label: 'Bubble Bleed Both',
   });
 })(window.wp);

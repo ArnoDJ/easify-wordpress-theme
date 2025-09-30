@@ -59,46 +59,32 @@ add_action('wp_enqueue_scripts', function () {
 // =======================================================
 // CUSTOM BLOCKS
 // =======================================================
-add_action('init', function () {
-    $block_path = get_stylesheet_directory() . '/blocks/content-bubble';
-
-    if ( file_exists( $block_path . '/block.json' ) ) {
-        register_block_type( $block_path );
-        error_log('bk-theme: ✅ content-bubble REGISTERED');
-    } else {
-        error_log('bk-theme: ❌ content-bubble block.json missing at ' . $block_path);
-    }
+add_action('init', function() {
+    register_block_type( __DIR__ . '/blocks/content-bubble' );
+    register_block_type( __DIR__ . '/blocks/svg-icon' );
+    register_block_type( __DIR__ . '/blocks/icon-feature' );
 });
 
 // =======================================================
 // CUSTOM BLOCK STYLES
 // =======================================================
 add_action('init', function () {
-    register_block_style('core/heading', [
-        'name'  => 'hero-title',
-        'label' => __('BK Title', 'bk-theme'),
-    ]);
-    register_block_style('core/paragraph', [
-        'name'  => 'hero-lead',
-        'label' => __('BK Lead', 'bk-theme'),
-    ]);
-    register_block_style('core/paragraph', [
-        'name'  => 'hero-body',
-        'label' => __('BK Body', 'bk-theme'),
-    ]);
-    register_block_style('core/buttons', [
-        'name'  => 'hero-buttons',
-        'label' => __('BK Buttons Row', 'bk-theme'),
-    ]);
-    register_block_style('core/button', [
-        'name'  => 'hero-cta',
-        'label' => __('BK CTA', 'bk-theme'),
-    ]);
+    $styles = [
+        ['core/heading', 'hero-title',   'BK Title'],
+        ['core/paragraph', 'hero-lead',  'BK Lead'],
+        ['core/paragraph', 'hero-body',  'BK Body'],
+        ['core/buttons',   'hero-buttons','BK Buttons Row'],
+        ['core/button',    'hero-cta',   'BK CTA'],
+        ['bk-theme/content-bubble', 'allow-bleed', 'Allow Bleed'],
+    ];
 
-    register_block_style('bk-theme/content-bubble', [
-        'name'  => 'allow-bleed',
-        'label' => __('Allow Bleed', 'bk-theme'),
-    ]);
+    foreach ($styles as [$block, $name, $label]) {
+        register_block_style($block, [
+            'name'         => $name,
+            'label'        => __($label, 'bk-theme'),
+            'style_handle' => 'bk-block-styles',
+        ]);
+    }
 });
 
 // =======================================================
@@ -180,3 +166,39 @@ add_shortcode('polylang_switcher', function ($atts = []) {
 
     return '<div class="bk-lang">' . $html . '</div>';
 });
+
+// =======================================================
+// IMAGE BLEED VARIATIONS (for core/image blocks)
+// =======================================================
+add_action('init', function () {
+    $sides = ['left', 'right'];
+    $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
+
+    foreach ($sides as $side) {
+        foreach ($sizes as $key => $label) {
+            register_block_style('core/image', [
+                'name'  => "bleed-{$side}-{$key}",
+                'label' => __("Bleed " . ucfirst($side) . " ({$label})", 'bk-theme'),
+                'style_handle' => 'bk-block-styles',
+            ]);
+        }
+    }
+});
+
+add_action('init', function() {
+    $path = get_template_directory() . '/blocks/icon-feature'; // use get_stylesheet_directory() if block is in a child theme
+    error_log("bk-theme: Testing path " . $path);
+
+    if (file_exists($path . '/block.json')) {
+        error_log("bk-theme: Found block.json");
+        $result = register_block_type($path);
+        if (is_wp_error($result)) {
+            error_log("bk-theme: ❌ Failed to register Icon Feature block: " . $result->get_error_message());
+        } else {
+            error_log("bk-theme: ✅ Icon Feature block registered");
+        }
+    } else {
+        error_log("bk-theme: MISSING block.json");
+    }
+});
+

@@ -11,7 +11,11 @@
     "spacing": { "padding": true, "margin": ["top","bottom"] },
     "border": { "radius": true },
     "anchor": true,
-    "className": true
+    "className": true,
+    "layout": {
+      "flex": true,
+      "alignItems": true
+    }
   },
   "attributes": {
     "radiusChoice": { "type": "string", "default": "m" },        

@@ -1,0 +1,8 @@
+/* Frontend & Editor shared */
+.bk-svg-icon svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    fill: currentColor;
+    /* 🎨 SVG adopts text color */
+}

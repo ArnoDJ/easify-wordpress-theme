@@ -1,0 +1,71 @@
+.bk-icon-feature__media {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.6rem;
+  gap: 0.5rem;
+}
+
+.bk-icon-feature__icon svg {
+  width: 30px;
+  height: 30px;
+  fill: currentColor;
+  /* respects iconColor */
+}
+
+.bk-icon-feature__arrow svg {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  fill: currentColor;
+  /* respects iconColor */
+}
+
+.bk-icon-feature__title {
+  font-weight: 600;
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+.bk-icon-feature__text {
+  margin: 0;
+  font-size: 1.1rem !important;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.bk-icon-feature__icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  fill: currentColor;
+}
+
+.bk-icon-feature {
+  width: 100%;
+  margin: 0 !important;
+}
+
+@media (min-width: 700px) {
+  .bk-icon-feature {
+    width: 47%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bk-icon-feature {
+    width: 23%;
+
+  }
+}
+
+.bk-icon-feature__arrow {
+  color: inherit;
+  /* inherit from block setting */
+}
+
+.bk-icon-feature__arrow svg path {
+  fill: currentColor !important;
+}
+
+.wp-block-group.is-layout-flex:has(.bk-icon-feature) {
+  align-items: flex-start !important;
+}

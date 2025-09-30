@@ -17,134 +17,30 @@
 }
 
 .editor-styles-wrapper .brand-badge .wp-block-site-logo img {
-    display: block
+    display: block;
 }
 
-/* Base bubble (keeps clipping by default) */
-.wp-block-bk-theme-content-bubble {
-    position: relative;
-    overflow: hidden;
-    /* default: clip */
-    background: var(--wp--preset--color--light-gray, #f0f2f0);
-    border-radius: var(--bubble-radius, var(--wp--custom--radius--xl, 36px));
-    padding: clamp(22px, 4vw, 48px);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, .08);
-}
-
-/* Style variation: let stuff bleed, but keep the rounded background */
-.wp-block-bk-theme-content-bubble.is-style-allow-bleed {
+/* Bubble Bleed — Editor preview */
+.wp-block-bk-theme-content-bubble.is-style-bubble-bleed-right,
+.wp-block-bk-theme-content-bubble.is-style-bubble-bleed-left,
+.wp-block-bk-theme-content-bubble.is-style-bubble-bleed-both {
     overflow: visible;
-    /* allow overflow */
-    background: transparent;
-    /* background moves to ::before */
-}
-
-.wp-block-bk-theme-content-bubble.is-style-allow-bleed::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    /* cover padding box */
-    border-radius: inherit;
-    background: var(--wp--preset--color--light-gray, #f0f2f0);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, .08);
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* Put real content above the painted background */
-.wp-block-bk-theme-content-bubble.is-style-allow-bleed>* {
     position: relative;
-    z-index: 1;
+    max-width: none !important;
+    width: auto;
 }
 
-/* Image that bleeds above/below the bubble */
-.wp-block-image.is-style-bk-bleed-figure {
-    --bleed-y: clamp(20px, 6vw, 100px);
-    /* adjust as needed */
-    margin-top: calc(-1 * var(--bleed-y));
-    margin-bottom: calc(-1 * var(--bleed-y));
-    z-index: 2;
-    /* above the bubble's ::before */
+.wp-block-bk-theme-content-bubble.is-style-bubble-bleed-right {
+    width: calc(100% + 200px);
+    margin-right: -200px;
 }
 
-.wp-block-image.is-style-bk-bleed-figure img {
-    display: block;
-    /* optional: soft shadow to match design */
-    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .15));
+.wp-block-bk-theme-content-bubble.is-style-bubble-bleed-left {
+    width: calc(100% + 200px);
+    margin-left: -200px;
 }
 
-/* Default amount; you can override per-image with the size helpers below */
-:root {
-    --bk-bleed-y: clamp(24px, 6vw, 120px);
-}
-
-/* Keep the image above the bubble's ::before background */
-.wp-block-image.is-style-bk-bleed-up,
-.wp-block-image.is-style-bk-bleed-down,
-.wp-block-image.is-style-bk-bleed-both {
-    z-index: 2;
-    position: relative;
-}
-
-.wp-block-image.is-style-bk-bleed-up {
-    margin-top: calc(-1 * var(--bk-bleed-y));
-}
-
-.wp-block-image.is-style-bk-bleed-down {
-    margin-bottom: calc(-1 * var(--bk-bleed-y));
-}
-
-.wp-block-image.is-style-bk-bleed-both {
-    margin-top: calc(-1 * var(--bk-bleed-y));
-    margin-bottom: calc(-1 * var(--bk-bleed-y));
-}
-
-/* Nice soft depth like the design */
-.wp-block-image.is-style-bk-bleed-up img,
-.wp-block-image.is-style-bk-bleed-down img,
-.wp-block-image.is-style-bk-bleed-both img {
-    display: block;
-    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .15));
-}
-
-/* Optional per-image size helpers (add in “Additional CSS class(es)”) */
-.wp-block-image.bleed-s {
-    --bk-bleed-y: 40px;
-}
-
-.wp-block-image.bleed-m {
-    --bk-bleed-y: 80px;
-}
-
-.wp-block-image.bleed-l {
-    --bk-bleed-y: 120px;
-}
-
-/* Bubble row flex */
-.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex {
-    display: flex;
-    flex-wrap: wrap;
-    /* allow wrapping when needed */
-    align-items: center;
-    gap: clamp(20px, 4vw, 60px);
-}
-
-/* Text column */
-.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>.wp-block-group:first-child {
-    flex: 1 1 300px;
-    /* flexible, but minimum 300px */
-    min-width: 0;
-    /* prevent overflow */
-    order: 1;
-}
-
-/* Image column */
-.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex>figure.wp-block-image {
-    flex: 1 1 300px;
-    /* shrink when space is tight */
-    max-width: 750px;
-    /* cap at design size */
-    min-width: 280px;
-    /* don’t shrink below */
-    order: 2;
+.wp-block-bk-theme-content-bubble.is-style-bubble-bleed-both {
+    width: calc(100% + 400px);
+    margin-inline: -200px;
 }
