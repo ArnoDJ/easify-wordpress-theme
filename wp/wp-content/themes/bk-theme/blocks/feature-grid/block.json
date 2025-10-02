@@ -1,0 +1,13 @@
+{
+  "apiVersion": 2,
+  "name": "bk-theme/feature-grid",
+  "title": "Feature Grid",
+  "category": "design",
+  "icon": "screenoptions",
+  "description": "A responsive grid of features.",
+  "supports": {
+    "align": ["wide", "full"]
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css"
+}

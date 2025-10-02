@@ -1,0 +1,20 @@
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* equal columns */
+    gap: 2.5rem 3rem;
+    max-width: 1200px;
+    /* keeps grid from hugging full width */
+    margin-left: auto;
+    /* center the grid */
+    margin-right: auto;
+    /* center the grid */
+    justify-items: center;
+    /* center items inside their grid cell */
+}
+
+@media (max-width: 800px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}

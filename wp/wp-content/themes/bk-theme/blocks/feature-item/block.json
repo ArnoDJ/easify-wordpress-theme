@@ -1,0 +1,17 @@
+{
+  "apiVersion": 2,
+  "name": "bk-theme/feature-item",
+  "title": "Feature Item",
+  "parent": ["bk-theme/feature-grid"],
+  "category": "design",
+  "icon": "star-filled",
+  "description": "An icon with a title and description.",
+  "attributes": {
+    "iconSvg": { "type": "string", "default": "" },
+    "iconColor": { "type": "string", "default": "#fdbb30" },
+    "title": { "type": "string", "default": "Feature Title" },
+    "text": { "type": "string", "default": "Feature description..." }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css"
+}

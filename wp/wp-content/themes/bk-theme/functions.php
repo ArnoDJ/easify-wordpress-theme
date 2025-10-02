@@ -66,6 +66,8 @@ add_action('init', function() {
     register_block_type( __DIR__ . '/blocks/accordion-item' );
     register_block_type( __DIR__ . '/blocks/pill-item' );
     register_block_type( __DIR__ . '/blocks/pill-row' );
+    register_block_type( __DIR__ . '/blocks/feature-grid' );
+    register_block_type( __DIR__ . '/blocks/feature-item' );
 });
 
 // =======================================================
