@@ -1,0 +1,24 @@
+.accordion-group {
+    flex: 0 0 50%;
+    /* take up half the row */
+    max-width: 50%;
+}
+
+@media (max-width: 1000px) {
+    .accordion-group {
+        flex: 0 0 100%;
+        /* drop to full width */
+        max-width: 100%;
+    }
+}
+
+.accordion-icon {
+    font-size: 3rem !important;
+    margin-right: 2rem;
+    color: #f5a623;
+    transition: transform 0.2s ease;
+}
+
+.accordion-header h3 {
+    font-weight: 500 !important;
+}

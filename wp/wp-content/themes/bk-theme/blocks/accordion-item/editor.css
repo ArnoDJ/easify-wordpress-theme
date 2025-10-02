@@ -1,0 +1,44 @@
+/* Match frontend accordion styles inside the editor */
+
+.accordion-item {
+    border-bottom: 1px solid #8cb0c0;
+    cursor: pointer;
+    margin: 0;
+    /* avoid extra spacing in editor */
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #62a3c8;
+    padding: 10px 0;
+}
+
+.accordion-icon {
+    font-size: 1.5rem;
+    color: #f5a623;
+    transition: transform 0.2s ease;
+}
+
+.accordion-item.open .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    background: #f5f9fb;
+    padding: 20px;
+    padding-left: 4rem !important;
+    margin-top: 10px;
+    border-radius: 4px;
+    /* optional for softer look */
+}
+
+/* Ensure RichText fields inside content look like frontend text */
+.accordion-content div[contenteditable="true"] {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}

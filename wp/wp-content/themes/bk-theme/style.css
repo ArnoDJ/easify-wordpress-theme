@@ -390,3 +390,24 @@ body {
         max-width: 100% !important;
     }
 }
+
+.is-style-two-col {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.is-style-two-col>* {
+    flex: 1 1 45%;
+    max-width: 45%;
+}
+
+
+/* Mobile: stack to full width */
+@media (max-width: 1000px) {
+    .is-style-two-col>* {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}

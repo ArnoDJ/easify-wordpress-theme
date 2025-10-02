@@ -1,0 +1,12 @@
+{
+  "apiVersion": 2,
+  "name": "bk-theme/accordion-group",
+  "title": "Accordion Group",
+  "category": "design",
+  "icon": "index-card",
+  "description": "A group of dropdowns where only one can be open at a time.",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css",
+  "script": "file:./frontend.js"
+}

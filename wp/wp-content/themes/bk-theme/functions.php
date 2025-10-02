@@ -63,6 +63,8 @@ add_action('init', function() {
     register_block_type( __DIR__ . '/blocks/content-bubble' );
     register_block_type( __DIR__ . '/blocks/svg-icon' );
     register_block_type( __DIR__ . '/blocks/icon-feature' );
+    register_block_type( __DIR__ . '/blocks/accordion-group' );
+    register_block_type( __DIR__ . '/blocks/accordion-item' );
 });
 
 // =======================================================
@@ -201,4 +203,12 @@ add_action('init', function() {
         error_log("bk-theme: MISSING block.json");
     }
 });
+
+add_action('init', function () {
+    register_block_style('core/group', [
+        'name'  => 'two-col',
+        'label' => __('Two Columns (50/50)', 'bk-theme'),
+    ]);
+});
+
 

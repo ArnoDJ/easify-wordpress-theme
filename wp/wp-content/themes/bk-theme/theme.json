@@ -13,13 +13,13 @@
         { "name": "White", "slug": "white", "color": "#ffffff" },
         { "name": "Black", "slug": "black", "color": "#000000" },
         { "name": "LightGray", "slug": "light-gray", "color": "#f0f2f0" },
-        { "name": "DarkGray", "slug": "dark-gray", "color": "#53ab98" }
+        { "name": "DarkGray", "slug": "dark-gray", "color": "#636363" }
       ]
     },
     "appearanceTools": true,
     "border": { "radius": true },
     "layout": {
-      "contentSize": "1400px",
+      "contentSize": "1300px",
       "wideSize": "1400px"
     },
     "spacing": {
@@ -52,6 +52,14 @@
       "bk-theme/content-bubble": {
         "border": {
           "radius": "var(--wp--custom--radius--m)"
+        }
+      },
+      "core/post-content": {
+        "spacing": {
+          "padding": {
+            "left": "1.5rem",
+            "right": "1.5rem"
+          }
         }
       }
     }

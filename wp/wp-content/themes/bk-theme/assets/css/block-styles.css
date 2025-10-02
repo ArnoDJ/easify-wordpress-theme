@@ -235,3 +235,53 @@ h3.wp-block-heading.is-style-hero-title {
 .block-editor-block-list__block {
     align-items: flex-start !important;
 }
+
+.accordion-group {
+    border-top: 1px solid #8cb0c0;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #8cb0c0;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 1.3rem;
+    color: #62a3c8;
+    padding: 12px 0;
+}
+
+.accordion-icon {
+    font-size: 1.5rem;
+    color: #f5a623;
+    transition: transform 0.2s ease;
+}
+
+.accordion-item.open .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    background: #f5f9fb;
+    padding: 20px;
+    display: none;
+}
+
+.accordion-item.open .accordion-content {
+    display: block;
+    animation: dropdown 0.3s ease;
+}
+
+@keyframes dropdown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
