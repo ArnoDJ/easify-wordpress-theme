@@ -30,7 +30,6 @@ add_action('wp_enqueue_scripts', function () {
     $dir = get_stylesheet_directory();
     $uri = get_stylesheet_directory_uri();
 
-    // Helper to enqueue only if the file exists
     $add = function (string $handle, string $pathFromThemeRoot, array $deps = []) use ($dir, $uri) {
         $abs = $dir . $pathFromThemeRoot;
         if (! file_exists($abs)) {
@@ -46,7 +45,7 @@ add_action('wp_enqueue_scripts', function () {
         error_log("bk-theme: ✅ enqueued $pathFromThemeRoot");
     };
 
-    // Order matters: base → layout → components → utilities → block styles
+    // Order matters
     $add('bk-style',        '/style.css');
     $add('bk-base',         '/assets/css/base.css', ['bk-style']);
     $add('bk-layout',       '/assets/css/layout.css', ['bk-base']);
@@ -65,6 +64,8 @@ add_action('init', function() {
     register_block_type( __DIR__ . '/blocks/icon-feature' );
     register_block_type( __DIR__ . '/blocks/accordion-group' );
     register_block_type( __DIR__ . '/blocks/accordion-item' );
+    register_block_type( __DIR__ . '/blocks/pill-item' );
+    register_block_type( __DIR__ . '/blocks/pill-row' );
 });
 
 // =======================================================
@@ -86,6 +87,44 @@ add_action('init', function () {
             'label'        => __($label, 'bk-theme'),
             'style_handle' => 'bk-block-styles',
         ]);
+    }
+
+    // Extra heading font-weight variations
+    register_block_style('core/heading', [
+        'name'  => 'light',
+        'label' => __('Light'),
+        'inline_style' => '.is-style-light { font-weight: 300; }'
+    ]);
+
+    register_block_style('core/heading', [
+        'name'  => 'semibold',
+        'label' => __('Semi Bold'),
+        'inline_style' => '.is-style-semibold { font-weight: 600; }'
+    ]);
+
+    register_block_style('core/heading', [
+        'name'  => 'black',
+        'label' => __('Black'),
+        'inline_style' => '.is-style-black { font-weight: 900; }'
+    ]);
+
+    // Two-column group variation
+    register_block_style('core/group', [
+        'name'  => 'two-col',
+        'label' => __('Two Columns (50/50)', 'bk-theme'),
+    ]);
+
+    // Image bleed variations
+    $sides = ['left', 'right'];
+    $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
+    foreach ($sides as $side) {
+        foreach ($sizes as $key => $label) {
+            register_block_style('core/image', [
+                'name'  => "bleed-{$side}-{$key}",
+                'label' => __("Bleed " . ucfirst($side) . " ({$label})", 'bk-theme'),
+                'style_handle' => 'bk-block-styles',
+            ]);
+        }
     }
 });
 
@@ -169,46 +208,28 @@ add_shortcode('polylang_switcher', function ($atts = []) {
     return '<div class="bk-lang">' . $html . '</div>';
 });
 
-// =======================================================
-// IMAGE BLEED VARIATIONS (for core/image blocks)
-// =======================================================
-add_action('init', function () {
-    $sides = ['left', 'right'];
-    $sizes = ['s' => 'Small', 'm' => 'Medium', 'l' => 'Large'];
-
-    foreach ($sides as $side) {
-        foreach ($sizes as $key => $label) {
-            register_block_style('core/image', [
-                'name'  => "bleed-{$side}-{$key}",
-                'label' => __("Bleed " . ucfirst($side) . " ({$label})", 'bk-theme'),
-                'style_handle' => 'bk-block-styles',
-            ]);
-        }
-    }
-});
-
 add_action('init', function() {
-    $path = get_template_directory() . '/blocks/icon-feature'; // use get_stylesheet_directory() if block is in a child theme
-    error_log("bk-theme: Testing path " . $path);
+    register_block_style('core/paragraph', [
+        'name'  => 'verynarrow',
+        'label' => __('Wide (500px)'),
+        'inline_style' => '.is-style-verynarrow { max-width: 500px; margin-left:auto; margin-right:auto; }'
+    ]);
+    register_block_style('core/paragraph', [
+        'name'  => 'narrow',
+        'label' => __('Narrow (650px)'),
+        'inline_style' => '.is-style-narrow { max-width: 650px; margin-left:auto; margin-right:auto; }'
+    ]);
 
-    if (file_exists($path . '/block.json')) {
-        error_log("bk-theme: Found block.json");
-        $result = register_block_type($path);
-        if (is_wp_error($result)) {
-            error_log("bk-theme: ❌ Failed to register Icon Feature block: " . $result->get_error_message());
-        } else {
-            error_log("bk-theme: ✅ Icon Feature block registered");
-        }
-    } else {
-        error_log("bk-theme: MISSING block.json");
-    }
-});
+    register_block_style('core/paragraph', [
+        'name'  => 'medium',
+        'label' => __('Medium (900px)'),
+        'inline_style' => '.is-style-medium { max-width: 900px; margin-left:auto; margin-right:auto; }'
+    ]);
 
-add_action('init', function () {
-    register_block_style('core/group', [
-        'name'  => 'two-col',
-        'label' => __('Two Columns (50/50)', 'bk-theme'),
+    register_block_style('core/paragraph', [
+        'name'  => 'wide',
+        'label' => __('Wide (1200px)'),
+        'inline_style' => '.is-style-wide { max-width: 1200px; margin-left:auto; margin-right:auto; }'
     ]);
 });
-
 

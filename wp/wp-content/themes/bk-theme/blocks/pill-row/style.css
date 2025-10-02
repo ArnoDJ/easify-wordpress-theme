@@ -1,0 +1,12 @@
+.pill-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@media (max-width: 800px) {
+    .pill-row {
+        flex-wrap: wrap;
+    }
+}

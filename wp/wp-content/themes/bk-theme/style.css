@@ -411,3 +411,25 @@ body {
         max-width: 100%;
     }
 }
+
+/* Make figure respect inline width styles */
+.wp-block-image {
+    max-width: 100%;
+}
+
+/* Force image to scale inside figure */
+.wp-block-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.wp-block-image {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.is-layout-flex>.wp-block-image[style*="width"] {
+    flex: 0 0 auto;
+    /* don’t stretch in flexbox */
+}

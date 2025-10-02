@@ -1,0 +1,10 @@
+{
+  "apiVersion": 2,
+  "name": "bk-theme/pill-row",
+  "title": "Pill Row",
+  "category": "design",
+  "icon": "editor-ol",
+  "supports": { "align": [ "wide", "full" ] },
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css"
+}

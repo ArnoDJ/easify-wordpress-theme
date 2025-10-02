@@ -285,3 +285,52 @@ h3.wp-block-heading.is-style-hero-title {
         transform: translateY(0);
     }
 }
+
+/* When image + text sit side-by-side */
+.wp-block-image.alignleft,
+.wp-block-image.alignright {
+    margin: 0 2rem 1rem 0;
+    /* spacing */
+}
+
+/* Constrain image size consistently */
+.wp-block-image img {
+    height: auto;
+    max-width: 400px;
+    /* adjust to match XD mockup */
+    width: 100%;
+    display: block;
+}
+
+/* Keep text column readable */
+.two-col-text {
+    max-width: 600px;
+    /* adjust to match XD */
+}
+
+/* Align image top with heading */
+.wp-block-columns.is-style-two-col {
+    align-items: flex-start;
+}
+
+/* Make sure image and text align top */
+.is-style-two-col {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+/* Left column image */
+.is-style-two-col .wp-block-image {
+    flex: 0 0 auto;
+    max-width: 400px;
+    /* match design */
+}
+
+/* Right column text */
+.is-style-two-col>*:not(.wp-block-image) {
+    flex: 1 1 auto;
+    max-width: 600px;
+    /* prevent text column from stretching too wide */
+}
