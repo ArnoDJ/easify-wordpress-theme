@@ -334,3 +334,43 @@ h3.wp-block-heading.is-style-hero-title {
     max-width: 600px;
     /* prevent text column from stretching too wide */
 }
+
+/* Rounded inputs */
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 2rem;
+    border: none;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    background: #fff;
+    box-shadow: 0 0 0 1px #ddd inset;
+}
+
+/* Bigger textarea */
+form textarea {
+    min-height: 120px;
+    border-radius: 1rem;
+}
+
+/* Submit button */
+form button,
+form input[type="submit"] {
+    background: var(--wp--preset--color--yellow, #fdbb30);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form button:hover,
+form input[type="submit"]:hover {
+    background: #e5a420;
+}
