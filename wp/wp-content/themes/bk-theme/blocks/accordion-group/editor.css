@@ -22,3 +22,10 @@
 .accordion-header h3 {
     font-weight: 500 !important;
 }
+
+/* Remove unwanted top border/line from accordion group */
+.wp-block-bk-theme-accordion-group {
+    border-top: none !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}

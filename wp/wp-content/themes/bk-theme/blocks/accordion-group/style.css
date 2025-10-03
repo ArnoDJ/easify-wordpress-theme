@@ -73,3 +73,10 @@
 .wp-block-group.is-layout-flex {
     align-items: flex-start;
 }
+
+/* Remove unwanted top border/line from accordion group */
+.wp-block-bk-theme-accordion-group {
+    border-top: none !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
