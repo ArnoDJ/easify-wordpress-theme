@@ -1,0 +1,17 @@
+.bk-blog-grid {
+    display: flex;
+    flex-direction: column;
+    /* stack posts */
+    gap: 2rem;
+    /* spacing between posts */
+    width: 100%;
+}
+
+.bk-blog-grid article {
+    width: 100%;
+    /* take full width */
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}

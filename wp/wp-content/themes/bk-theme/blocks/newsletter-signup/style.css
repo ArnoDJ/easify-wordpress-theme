@@ -1,0 +1,81 @@
+.bk-newsletter {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+}
+
+.bk-newsletter input[type="email"] {
+    flex: 1;
+    border: none;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 999px;
+    /* full pill shape */
+    background: #fff;
+    margin-bottom: 0;
+}
+
+.bk-newsletter button {
+    position: relative;
+    margin-left: -2.2rem;
+    /* overlap the input slightly */
+    z-index: 1;
+    /* sit on top of the input */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    border: none;
+    border-radius: 999px;
+    /* full pill shape */
+    background: var(--wp--preset--color--primary, #0b5c6b);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.bk-newsletter button:hover {
+    background: var(--wp--preset--color--primary-dark, #08424d);
+}
+
+.bk-newsletter i {
+    color: var(--wp--preset--color--accent, #f6a623);
+    font-size: 1rem;
+}
+
+.bk-newsletter i {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    color: var(--wp--preset--color--accent, #f6a623);
+}
+
+@media (max-width: 600px) {
+    .bk-newsletter {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: stretch;
+    }
+
+    .bk-newsletter input[type="email"] {
+        border-radius: 999px;
+        /* full pill */
+        margin: 0;
+    }
+
+    .bk-newsletter button {
+        margin-left: 0;
+        /* remove overlap */
+        border-radius: 999px;
+        /* full pill */
+        width: 100%;
+    }
+}

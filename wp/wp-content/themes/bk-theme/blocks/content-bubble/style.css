@@ -159,7 +159,6 @@ bk-theme — content bubble
 /* Right bleed */
 .wp-block-bk-theme-content-bubble.is-style-bubble-bleed-right {
     margin-right: -400px;
-    padding-right: 400px;
 }
 
 /* Left bleed */

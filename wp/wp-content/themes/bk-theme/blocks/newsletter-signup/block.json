@@ -1,0 +1,13 @@
+{
+  "apiVersion": 2,
+  "name": "bk-theme/newsletter-signup",
+  "title": "Newsletter Signup",
+  "category": "widgets",
+  "icon": "email",
+  "description": "Email input with button for newsletter signup.",
+  "editorScript": "file:./index.js",
+  "style": "file:./style.css",
+  "supports": {
+    "html": false
+  }
+}

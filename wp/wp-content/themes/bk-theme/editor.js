@@ -201,3 +201,12 @@ wp.domReady(() => {
     });
   });
 });
+
+wp.domReady(() => {
+  wp.richText.registerFormatType('core/underline', {
+    title: 'Underline',
+    tagName: 'u',
+    className: null,
+    edit: wp.blockEditor.RichTextToolbarButton,
+  });
+});
