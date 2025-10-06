@@ -1,3 +1,16 @@
+/* Make the whole form selectable in the editor */
+.wp-block-bk-theme-newsletter-signup .bk-newsletter {
+    pointer-events: none;
+}
+
+/* But still display the cursor properly */
+.wp-block-bk-theme-newsletter-signup input,
+.wp-block-bk-theme-newsletter-signup button {
+    pointer-events: none;
+    opacity: 0.8;
+    cursor: default;
+}
+
 .bk-newsletter {
     display: flex;
     align-items: center;

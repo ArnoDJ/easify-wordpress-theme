@@ -44,3 +44,7 @@
     width: calc(100% + 400px);
     margin-inline: -200px;
 }
+
+.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex {
+    gap: 0 !important;
+}

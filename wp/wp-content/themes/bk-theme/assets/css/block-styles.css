@@ -383,3 +383,7 @@ form input[type="submit"]:hover {
     color: var(--arrow-color, currentColor);
     /* default = text color */
 }
+
+.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex {
+    gap: 0 !important;
+}
