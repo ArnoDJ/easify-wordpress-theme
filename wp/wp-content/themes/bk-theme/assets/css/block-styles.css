@@ -370,3 +370,16 @@ form button:hover,
 form input[type="submit"]:hover {
     background: #e5a420;
 }
+
+.is-style-leading-arrow::before {
+    content: "\f061";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    display: inline-block;
+    margin-right: 0.35em;
+
+    font-size: inherit;
+    line-height: inherit;
+    color: var(--arrow-color, currentColor);
+    /* default = text color */
+}

@@ -1,0 +1,16 @@
+{
+  "apiVersion": 2,
+  "name": "bk-theme/icon-text",
+  "title": "Icon Text",
+  "category": "widgets",
+  "icon": "format-image",
+  "description": "An uploaded SVG followed by text.",
+  "attributes": {
+    "svgUrl": { "type": "string", "default": "" },
+    "svgAlt": { "type": "string", "default": "" },
+    "text": { "type": "string", "default": "" }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css"
+}

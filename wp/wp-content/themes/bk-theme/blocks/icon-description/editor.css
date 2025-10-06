@@ -1,0 +1,21 @@
+.icon-description {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.icon-description__placeholder {
+    width: 56px;
+    height: 56px;
+    background: #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 12px;
+}
+
+.icon-description__content {
+    flex: 1;
+}

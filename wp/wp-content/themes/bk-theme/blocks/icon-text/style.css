@@ -1,0 +1,38 @@
+.icon-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    color: var(--wp--preset--color--dark-blue, #135a70);
+}
+
+.icon-text__icon {
+    width: 6rem;
+    height: auto;
+    flex-shrink: 0;
+    display: block;
+    filter: brightness(0) saturate(100%) invert(18%) sepia(29%) saturate(986%) hue-rotate(153deg) brightness(95%) contrast(89%);
+}
+
+.icon-text__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    line-height: 1.2;
+    margin-left: 0.5rem;
+}
+
+.icon-text__title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--wp--preset--color--dark-blue, #135a70);
+}
+
+.icon-text__subtitle {
+    font-weight: 600;
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    color: var(--wp--preset--color--dark-blue, #135a70);
+}

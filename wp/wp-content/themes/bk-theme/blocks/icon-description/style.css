@@ -1,0 +1,38 @@
+.icon-description {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    color: var(--wp--preset--color--dark-gray, #636363);
+    font-weight: 400;
+}
+
+.icon-description__icon {
+    width: 8rem;
+    height: auto;
+    flex-shrink: 0;
+    display: block;
+    filter: brightness(0) saturate(100%) invert(18%) sepia(29%) saturate(986%) hue-rotate(153deg) brightness(95%) contrast(89%);
+}
+
+.icon-description__content {
+    margin-left: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    line-height: 1.5;
+    font-size: 1rem;
+    max-width: 400px;
+}
+
+.icon-description__lead {
+    color: var(--wp--preset--color--dark-blue, #135a70);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-right: 0.25em;
+}
+
+.icon-description__text {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--wp--preset--color--dark-gray, #636363);
+}

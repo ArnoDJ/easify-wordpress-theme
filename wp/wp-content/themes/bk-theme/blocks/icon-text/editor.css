@@ -1,0 +1,22 @@
+.icon-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.icon-text__placeholder {
+    width: 4rem;
+    height: 4rem;
+    background: #ddd;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 12px;
+}
+
+.icon-text__content {
+    display: flex;
+    flex-direction: column;
+}

@@ -9,7 +9,6 @@
 add_action('after_setup_theme', function () {
     add_theme_support('editor-styles');
 
-    // Load editor styles
     add_editor_style([
         'assets/css/base.css',
         'assets/css/layout.css',
@@ -39,7 +38,6 @@ add_action('wp_enqueue_scripts', function () {
         );
     };
 
-    // Order matters
     $add('bk-style',        '/style.css');
     $add('bk-base',         '/assets/css/base.css', ['bk-style']);
     $add('bk-layout',       '/assets/css/layout.css', ['bk-base']);
@@ -63,6 +61,10 @@ add_action('init', function() {
     register_block_type( __DIR__ . '/blocks/feature-grid' );
     register_block_type( __DIR__ . '/blocks/feature-item' );
     register_block_type( __DIR__ . '/blocks/newsletter-signup');
+    register_block_type( __DIR__ . '/blocks/icon-text' );
+    register_block_type( __DIR__ . '/blocks/icon-description' );
+    register_block_type( __DIR__ . '/blocks/pill-button' );
+
 });
 
 // =======================================================
@@ -79,6 +81,12 @@ function bk_theme_register_blog_posts_block() {
     ) );
 }
 add_action( 'init', 'bk_theme_register_blog_posts_block' );
+function bk_theme_enqueue_saira_font() {
+    $font_url = 'https://fonts.googleapis.com/css2?family=Saira:wght@100;200;300;400;500;600;700;800;900&display=swap';
+    wp_enqueue_style('bk-theme-font-saira', $font_url, [], null);
+}
+add_action('wp_enqueue_scripts', 'bk_theme_enqueue_saira_font');
+add_action('enqueue_block_editor_assets', 'bk_theme_enqueue_saira_font');
 
 function bk_theme_render_blog_posts_block($attributes) {
     $query = new WP_Query(array(
@@ -110,8 +118,42 @@ function bk_theme_render_blog_posts_block($attributes) {
 
     return ob_get_clean();
 }
+// =======================================================
+// LOAD BLOCK STYLES ALSO IN EDITOR
+// =======================================================
+add_action('enqueue_block_editor_assets', function() {
+    wp_enqueue_style(
+        'bk-block-styles-editor',
+        get_stylesheet_directory_uri() . '/assets/css/block-styles.css',
+        [],
+        filemtime(get_stylesheet_directory() . '/assets/css/block-styles.css')
+    );
 
-// in functions.php
+    // Font Awesome also in editor
+    wp_enqueue_style(
+        'font-awesome-editor',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css',
+        [],
+        '6.5.2'
+    );
+
+    // Load editor.js
+    $path = get_stylesheet_directory() . '/editor.js';
+    $uri  = get_stylesheet_directory_uri() . '/editor.js';
+    if (file_exists($path)) {
+        wp_enqueue_script(
+            'bk-theme-editor-js',
+            $uri,
+            ['wp-blocks','wp-element','wp-rich-text','wp-editor','wp-block-editor','wp-components','wp-compose','wp-i18n','wp-hooks'],
+            filemtime($path),
+            true
+        );
+    }
+});
+
+// =======================================================
+// ENQUEUE FONT AWESOME FRONTEND
+// =======================================================
 add_action('wp_enqueue_scripts', function() {
     wp_enqueue_style(
         'font-awesome',
@@ -120,4 +162,78 @@ add_action('wp_enqueue_scripts', function() {
         '6.5.2'
     );
 });
+
+// =======================================================
+// ENQUEUE EDITOR SCRIPT (for custom formats like inline arrow)
+// =======================================================
+add_action('enqueue_block_editor_assets', function() {
+    $path = get_stylesheet_directory() . '/editor.js';
+    $uri  = get_stylesheet_directory_uri() . '/editor.js';
+
+    if (file_exists($path)) {
+        wp_enqueue_script(
+            'bk-theme-editor-js',
+            $uri,
+            [
+                'wp-blocks',
+                'wp-element',
+                'wp-rich-text',
+                'wp-editor',
+                'wp-block-editor',
+                'wp-components',
+                'wp-compose',
+                'wp-i18n',
+                'wp-hooks',
+            ],
+            filemtime($path),
+            true
+        );
+    }
+});
+
+add_action('init', function() {
+    register_block_style('core/paragraph', [
+        'name'  => 'leading-arrow',
+        'label' => __('Leading Arrow', 'bk-theme'),
+    ]);
+});
+
+// ===============================
+// Register Team Member Block
+// ===============================
+function bk_theme_register_team_member_block() {
+    $dir = get_template_directory() . '/blocks/team-member';
+    $script_asset_path = $dir . '/index.asset.php'; // optional if you use @wordpress/scripts
+    $script_handle = 'bk-theme-team-member';
+
+    // Register editor script (index.js)
+    wp_register_script(
+        $script_handle,
+        get_template_directory_uri() . '/blocks/team-member/index.js',
+        array('wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-block-editor')
+    );
+
+    // Register editor + frontend styles
+    wp_register_style(
+        'bk-theme-team-member-editor',
+        get_template_directory_uri() . '/blocks/team-member/editor.css',
+        array('wp-edit-blocks')
+    );
+
+    wp_register_style(
+        'bk-theme-team-member',
+        get_template_directory_uri() . '/blocks/team-member/style.css'
+    );
+
+    // Register the block type
+    register_block_type(
+        $dir,
+        array(
+            'editor_script' => $script_handle,
+            'editor_style'  => 'bk-theme-team-member-editor',
+            'style'         => 'bk-theme-team-member'
+        )
+    );
+}
+add_action('init', 'bk_theme_register_team_member_block');
 

@@ -1,0 +1,11 @@
+.team-member__placeholder {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 14px;
+}

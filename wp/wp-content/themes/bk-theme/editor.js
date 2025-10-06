@@ -1,10 +1,16 @@
 const { addFilter } = wp.hooks;
-const { InspectorControls } = wp.blockEditor;
+const { InspectorControls, RichTextToolbarButton } = wp.blockEditor;
 const { PanelBody, CheckboxControl, SelectControl } = wp.components;
 const { createHigherOrderComponent } = wp.compose;
-const { Fragment, createElement } = wp.element;
+const { Fragment, createElement, RawHTML } = wp.element;
+const { __ } = wp.i18n;
+const { registerFormatType, toggleFormat, getFormatType, insert } = wp.richText;
 
 console.log('🔥 bk-theme editor.js loaded ✅');
+
+// =======================================================
+// IMAGE BLOCK EXTENSIONS
+// =======================================================
 
 // Extend block attributes
 const addImageAttributes = ( settings, name ) => {
@@ -16,7 +22,7 @@ const addImageAttributes = ( settings, name ) => {
         bleedLeft: { type: 'boolean', default: false },
         bleedRight: { type: 'boolean', default: false },
         bleedSize: { type: 'string', default: 'm' },
-        hideOnMobile: { type: 'boolean', default: false }, // ✅ new attribute
+        hideOnMobile: { type: 'boolean', default: false },
     });
 
     return settings;
@@ -99,7 +105,7 @@ const applyImageClasses = ( extraProps, blockType, attributes ) => {
     if ( bleedLeft ) classes.push( 'bleed-left' );
     if ( bleedRight ) classes.push( 'bleed-right' );
     if ( bleedSize ) classes.push( `bleed-${ bleedSize }` );
-    if ( hideOnMobile ) classes.push( 'hide-on-mobile' ); // ✅ new class
+    if ( hideOnMobile ) classes.push( 'hide-on-mobile' );
 
     if ( classes.length ) {
         extraProps.className = [ extraProps.className, ...classes ].filter(Boolean).join( ' ' );
@@ -126,7 +132,7 @@ addFilter(
         if (bleedLeft) extraClasses.push('bleed-left');
         if (bleedRight) extraClasses.push('bleed-right');
         if (bleedSize) extraClasses.push(`bleed-${bleedSize}`);
-        if (hideOnMobile) extraClasses.push('hide-on-mobile'); // ✅ editor too
+        if (hideOnMobile) extraClasses.push('hide-on-mobile');
 
         return createElement(BlockListBlock, {
             ...props,
@@ -135,7 +141,10 @@ addFilter(
     }
 );
 
-// 🔹 Auto-inject arrow into hero-cta buttons
+// =======================================================
+// HERO CTA BUTTON ARROW
+// =======================================================
+
 const withHeroCtaArrow = createHigherOrderComponent((BlockEdit) => {
     return (props) => {
         if (props.name !== 'core/button') {
@@ -145,19 +154,16 @@ const withHeroCtaArrow = createHigherOrderComponent((BlockEdit) => {
         const { attributes } = props;
         const { className = '' } = attributes;
 
-        // Only act if style class contains "is-style-hero-cta"
         const isHeroCta = className.includes('is-style-hero-cta');
 
         if (!isHeroCta) {
             return createElement(BlockEdit, props);
         }
 
-        // Wrap original edit output, but inject SVG after text
         return createElement(
             'div',
             { className: 'bk-hero-cta-wrapper' },
             createElement(BlockEdit, props),
-            // Add preview of arrow inside editor (not saved separately)
             createElement(RawHTML, {}, `
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                   <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
@@ -169,18 +175,19 @@ const withHeroCtaArrow = createHigherOrderComponent((BlockEdit) => {
 
 addFilter('editor.BlockEdit', 'bk-theme/with-hero-cta-arrow', withHeroCtaArrow);
 
-// 🔹 Also inject into frontend + editor save output
 addFilter('blocks.getSaveContent.extraProps', 'bk-theme/apply-hero-cta-arrow', (extraProps, blockType, attributes) => {
     if (blockType.name !== 'core/button') return extraProps;
 
     const { className = '' } = attributes;
     if (!className.includes('is-style-hero-cta')) return extraProps;
 
-    // Append an identifying class for styling
     extraProps.className = [extraProps.className, 'bk-hero-cta'].filter(Boolean).join(' ');
     return extraProps;
 });
 
+// =======================================================
+// CONTENT BUBBLE DETECTION (dynamic class)
+// =======================================================
 wp.domReady(() => {
   wp.data.subscribe(() => {
     const blocks = wp.data.select('core/block-editor').getBlocks();
@@ -202,11 +209,36 @@ wp.domReady(() => {
   });
 });
 
+// =======================================================
+// CUSTOM RICHTEXT FORMATS
+// =======================================================
 wp.domReady(() => {
-  wp.richText.registerFormatType('core/underline', {
-    title: 'Underline',
-    tagName: 'u',
-    className: null,
-    edit: wp.blockEditor.RichTextToolbarButton,
+  const ArrowIcon = createElement(
+    "svg",
+    { width: 20, height: 20, viewBox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg" },
+    createElement("path", { d: "M14 5l-7 7 7 7" })
+  );
+
+  registerFormatType("bk-theme/leading-arrow", {
+    title: __("Leading Arrow", "bk-theme"),
+    tagName: "span",
+    className: "leading-arrow",
+    edit({ isActive, value, onChange }) {
+      return createElement(RichTextToolbarButton, {
+        icon: ArrowIcon,
+        title: __("Insert Leading Arrow", "bk-theme"),
+        onClick: () => {
+          if (isActive) {
+            // remove format if already applied
+            onChange(removeFormat(value, "bk-theme/leading-arrow", 0, 1));
+          } else {
+            // apply format to the first character of the paragraph
+            onChange(applyFormat(value, { type: "bk-theme/leading-arrow" }, 0, 1));
+          }
+        },
+        isActive,
+      });
+    },
   });
 });
+

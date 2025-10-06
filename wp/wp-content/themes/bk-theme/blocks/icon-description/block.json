@@ -1,0 +1,17 @@
+{
+  "apiVersion": 2,
+  "name": "bk-theme/icon-description",
+  "title": "Icon Description",
+  "category": "widgets",
+  "icon": "info-outline",
+  "description": "An SVG icon followed by highlighted lead text and description paragraph.",
+  "attributes": {
+    "svgUrl": { "type": "string", "default": "" },
+    "svgAlt": { "type": "string", "default": "" },
+    "lead": { "type": "string", "default": "" },
+    "text": { "type": "string", "default": "" }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css"
+}

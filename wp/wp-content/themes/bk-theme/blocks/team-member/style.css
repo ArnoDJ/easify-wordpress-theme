@@ -1,0 +1,38 @@
+.team-member {
+    text-align: center;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.team-member__image,
+.team-member__name,
+.team-member__role {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.team-member__image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #e5e5e5;
+}
+
+.team-member__name {
+    font-weight: 600;
+    font-family: inherit;
+    font-size: 2rem;
+    color: var(--wp--preset--color--primary-dark, #08424d);
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.team-member__role {
+    margin-top: 0;
+    font-size: 1.2rem;
+    font-weight: 300 !important;
+    color: var(--wp--preset--color--dark-gray, #636363);
+}

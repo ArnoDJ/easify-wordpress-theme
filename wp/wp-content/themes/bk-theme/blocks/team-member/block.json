@@ -1,0 +1,25 @@
+{
+  "apiVersion": 2,
+  "name": "bk-theme/team-member",
+  "title": "Team Member",
+  "category": "widgets",
+  "icon": "groups",
+  "description": "Displays a team member with image, name, and role.",
+  "attributes": {
+    "imageUrl": { "type": "string", "default": "" },
+    "imageAlt": { "type": "string", "default": "" },
+    "name": { "type": "string", "default": "" },
+    "role": { "type": "string", "default": "" }
+  },
+  "example": {
+    "attributes": {
+      "imageUrl": "https://placekitten.com/200/200",
+      "imageAlt": "Team member example",
+      "name": "Lisa Example",
+      "role": "Sales & Service"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css"
+}
