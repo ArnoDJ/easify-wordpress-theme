@@ -45,3 +45,790 @@
     outline: 2px solid var(--wp--preset--color--white, #ffffff);
     outline-offset: 4px;
 }
+
+/* ====== Top bar ====== */
+.bk-topbar.alignfull {
+    width: 100%;
+    max-width: 100%;
+    padding-block: 6px !important;
+    margin-bottom: 0 !important;
+}
+
+.bk-topbar>.container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0 !important;
+    padding-top: 40px;
+    /* desktop spacing; overridden on mobile */
+}
+
+.bk-topbar nav.wp-block-navigation {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    margin: 0 !important;
+}
+
+/* ====== Header row ====== */
+.bk-header-main {
+    padding-top: 36px;
+}
+
+.brand-badge {
+    align-self: flex-start;
+    position: relative;
+    z-index: 2;
+    margin-top: -140px !important;
+    height: 180px;
+    padding: 8px 12px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 0 24px 24px;
+    min-width: 100px
+}
+
+.wp-block-site-logo {
+    margin-left: 0 !important;
+}
+
+.bk-lang {
+    list-style-type: none;
+    margin-right: 20px !important;
+    margin-left: 40px !important;
+    display: flex;
+    text-align: center;
+    margin-top: 0;
+}
+
+.bk-topbar .bk-lang a,
+.bk-topbar .bk-lang a:link,
+.bk-topbar .bk-lang a:visited {
+    color: var(--wp--preset--color--light-blue) !important;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.bk-cta-link {
+    background: var(--wp--preset--color--light-blue) !important;
+}
+
+/* --- CORE MOBILE NAV (≤1100px) --- */
+@media (max-width:1100px) {
+
+    /* keep the top bar tidy */
+    .bk-topbar>.container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 8px;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: 56px !important;
+    }
+
+    /* use TOPBAR nav (ref:7) as the hamburger, left of "nl" */
+    .bk-topbar nav.wp-block-navigation {
+        order: 1;
+        display: flex !important;
+        align-items: center;
+    }
+
+    .bk-topbar .wp-block-shortcode {
+        order: 2;
+        display: flex;
+        align-items: center;
+    }
+
+    /* show only the trigger; kill inline list + bullets */
+    .bk-topbar nav ul,
+    .bk-topbar nav li {
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .bk-topbar .wp-block-navigation__container {
+        display: none !important;
+    }
+
+    /* make the button a white SVG burger */
+    .bk-topbar .wp-block-navigation__responsive-container-open {
+        display: inline-flex !important;
+        color: #fff !important;
+        background: none !important;
+        border: 0 !important;
+        padding: 0 !important;
+        line-height: 1;
+    }
+
+    .bk-topbar .wp-block-navigation__responsive-container-open svg {
+        display: block !important;
+        width: 28px;
+        height: 28px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+    }
+
+    /* hide the HEADER nav on mobile so you don’t get two menus */
+    .bk-header-main nav.wp-block-navigation {
+        margin-top: -75px !important;
+    }
+
+    /* overlay colors */
+    .wp-block-navigation__responsive-container {
+        background: var(--wp--preset--color--dark-blue) !important;
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container .wp-block-navigation-item a {
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container-close {
+        color: #fff !important;
+    }
+
+    /* Make the top bar a proper row & a positioning context */
+    .bk-topbar>.container {
+        position: relative;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 10px;
+        height: 56px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* 1) Desktop topbar nav goes away on mobile */
+    .bk-topbar .topbar-nav {
+        display: none !important;
+    }
+
+    /* 2) Use the HEADER nav as the hamburger */
+    /* Place its button inside the top bar, to the left of "nl" */
+    .bk-header-main .header-nav {
+        position: absolute !important;
+        top: 50% !important;
+        right: calc(var(--container-pad) + 24px) !important;
+        /* just left of language */
+        transform: translateY(-50%) !important;
+        display: inline-flex !important;
+        align-items: center;
+        margin: 0 !important;
+        z-index: 5;
+    }
+
+    .bk-header-main .header-nav:not(.is-menu-open) .wp-block-navigation__container {
+        display: none !important;
+    }
+
+    /* When the overlay is open, make sure the list shows vertically */
+    .bk-header-main .header-nav.is-menu-open .wp-block-navigation__responsive-container .wp-block-navigation__container {
+        display: flex !important;
+        flex-direction: column;
+        row-gap: 12px;
+        /* tweak to taste */
+    }
+
+    /* Make the hamburger white and visible */
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container-open {
+        display: inline-flex !important;
+        color: #fff !important;
+        background: none !important;
+        border: 0 !important;
+        padding: 0 !important;
+        line-height: 1;
+    }
+
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container-open svg {
+        display: block !important;
+        width: 28px;
+        height: 28px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+    }
+
+    /* Keep the language link styled */
+    .bk-topbar .bk-lang a,
+    .bk-topbar .bk-lang a:link,
+    .bk-topbar .bk-lang a:visited {
+        color: var(--wp--preset--color--light-blue) !important;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    /* Overlay menu colors */
+    .wp-block-navigation__responsive-container {
+        background-color: var(--wp--preset--color--dark-blue) !important;
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container .wp-block-navigation-item a {
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container-close {
+        color: #fff !important;
+    }
+
+    /* make the top bar a tidy row and leave room for the fixed button */
+    .bk-topbar>.container {
+        position: relative;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 10px;
+        height: 56px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        padding-right: calc(var(--container-pad) + 44px) !important;
+        /* space for the fixed button */
+    }
+
+    /* reset header nav so WP can manage overlay normally */
+    .bk-header-main .header-nav {
+        position: static !important;
+        margin: 0 !important;
+        transform: none !important;
+    }
+
+    /* >>> Pin the OPEN BUTTON into the top bar, right of screen (left of "nl") */
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container-open {
+        position: fixed !important;
+        top: 18px !important;
+        /* visually centered in 56px */
+        right: calc(var(--container-pad) + 24px) !important;
+        z-index: 10001 !important;
+
+        display: inline-flex !important;
+        color: #fff !important;
+        /* white icon */
+        background: none !important;
+        border: 0 !important;
+        padding: 0 !important;
+        line-height: 1;
+    }
+
+    .admin-bar .bk-header-main .header-nav .wp-block-navigation__responsive-container-open {
+        top: calc(18px + var(--adminbar-h)) !important;
+    }
+
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container-open svg {
+        display: block !important;
+        width: 28px;
+        height: 28px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+    }
+
+    /* overlay colors only (don’t change its positioning!) */
+    .wp-block-navigation__responsive-container {
+        background-color: var(--wp--preset--color--dark-blue) !important;
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container .wp-block-navigation-item a {
+        color: #fff !important;
+    }
+
+    .wp-block-navigation__responsive-container-close {
+        color: #fff !important;
+    }
+
+    /* Undo any previous blanket hides/unsets */
+    .bk-header-main .header-nav .wp-block-navigation__container {
+        display: flex;
+        /* default for overlay */
+        flex-wrap: nowrap;
+    }
+
+    /* When open, make sure the overlay’s container is visible */
+    .bk-header-main .header-nav.is-menu-open .wp-block-navigation__responsive-container .wp-block-navigation__container {
+        display: flex !important;
+        flex-direction: column;
+        /* vertical list in overlay */
+    }
+
+    /* hide the inline list by default (closed state) */
+    .bk-header-main .header-nav .wp-block-navigation__container {
+        display: none !important;
+    }
+
+    /* WP adds is-menu-open on the RESPONSIVE CONTAINER (dialog) */
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__container {
+        display: flex !important;
+        flex-direction: column;
+        row-gap: 12px;
+        /* tweak if you like */
+    }
+
+    /* Don't reserve space on the right; let "nl" hug the edge */
+    .bk-topbar>.container {
+        padding-right: 0 !important;
+    }
+
+    /* Put the burger just to the LEFT of "nl" */
+    .bk-header-main .header-nav .wp-block-navigation__responsive-container-open {
+        right: calc(var(--container-pad) + 40px) !important;
+        top: 21px !important;
+        /* adjust 40px to taste */
+        z-index: 10001 !important;
+    }
+}
+
+/* ===================================== */
+/* NAVIGATION DROPDOWN STYLING           */
+/* ===================================== */
+
+/* Dropdown container */
+.wp-block-navigation__submenu-container {
+    background-color: var(--wp--preset--color--light-blue, #80bdd9) !important;
+    border-radius: 0 0 20px 20px;
+    padding: 1.5rem 2rem !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    min-width: 220px;
+}
+
+/* Align with design */
+.wp-block-navigation__submenu-container a {
+    color: var(--wp--preset--color--white, #ffffff) !important;
+    font-weight: 600;
+    text-decoration: none !important;
+    display: block;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Remove last border */
+.wp-block-navigation__submenu-container li:last-child a {
+    border-bottom: none;
+}
+
+/* Top-level nav item that opens dropdown */
+.wp-block-navigation-item.has-child>a {
+    color: var(--wp--preset--color--dark-blue, #135a70) !important;
+    font-weight: 700;
+}
+
+/* Dropdown arrow */
+.wp-block-navigation__submenu-icon {
+    color: var(--wp--preset--color--dark-blue, #135a70) !important;
+}
+
+/* Round the bottom edges of dropdown shadow */
+.wp-block-navigation__submenu-container:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+}
+
+/* Hover/focus link states */
+.wp-block-navigation__submenu-container a:hover,
+.wp-block-navigation__submenu-container a:focus-visible {
+    color: var(--wp--preset--color--dark-blue, #135a70) !important;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Optional: soften dropdown transition */
+.wp-block-navigation__submenu-container {
+    transition: all 0.2s ease-in-out;
+}
+
+.wp-block-navigation .has-child .wp-block-navigation-submenu__toggle[aria-expanded=true]~.wp-block-navigation__submenu-container,
+.wp-block-navigation .has-child:not(.open-on-click):hover>.wp-block-navigation__submenu-container {
+    padding-top: 5rem !important;
+    margin-top: -4.8rem
+}
+
+/* Make parent link (e.g. "Oplossingen") sit above its dropdown */
+.wp-block-navigation-item.has-child>a {
+    position: relative;
+    z-index: 20;
+    /* lift it above submenu background */
+}
+
+/* Lower submenu panel slightly so the link stays visible */
+.wp-block-navigation__submenu-container {
+    position: absolute;
+    padding-left: 1rem !important;
+    z-index: 10;
+    /* below the link but above other layout elements */
+}
+
+/* --- Keep first-level dropdowns perfectly aligned under parent link --- */
+.wp-block-navigation .has-child>.wp-block-navigation__submenu-container {
+    left: 0 !important;
+    /* remove rightward offset */
+    margin-left: 0 !important;
+    padding-inline-start: 0 !important;
+    transform: none !important;
+}
+
+/* If there are deeper nested dropdowns, keep their usual sideways offset */
+.wp-block-navigation .wp-block-navigation__submenu-container .wp-block-navigation__submenu-container {
+    left: 100% !important;
+    /* keeps 2nd+ level menus fanning out to the right */
+    top: 0 !important;
+}
+
+/* --- Add breathing room inside the dropdown --- */
+.wp-block-navigation .has-child>.wp-block-navigation__submenu-container {
+    padding: 1.5rem 2rem 1.5rem 1.5rem !important;
+    /* top, right, bottom, left */
+}
+
+.wp-block-navigation__submenu-container a {
+    padding-left: 0.75rem;
+    /* gentle inner left spacing */
+}
+
+/* Keep submenu perfectly aligned under parent */
+.wp-block-navigation .has-child>.wp-block-navigation__submenu-container {
+    left: 0 !important;
+    margin-left: 0 !important;
+    padding: 1.5rem 0 !important;
+    /* only top/bottom padding, no left/right */
+}
+
+/* Give inner breathing room to links, not container */
+.wp-block-navigation__submenu-container a {
+    display: block;
+    padding: 0.35rem 1.5rem;
+    /* vertical, horizontal spacing for text */
+}
+
+/* === Kill all horizontal offsets for first-level dropdowns === */
+.wp-block-navigation .has-child>.wp-block-navigation__submenu-container {
+    left: 0 !important;
+    right: auto !important;
+    inset-inline-start: 0 !important;
+    /* handles RTL too */
+    margin-left: 0 !important;
+    padding-inline-start: 0 !important;
+    transform: none !important;
+}
+
+/* === Then, give internal breathing room to the text only === */
+.wp-block-navigation .has-child>.wp-block-navigation__submenu-container a {
+    padding-left: 1.25rem !important;
+    /* inner left space for text */
+    padding-right: 1.25rem !important;
+    /* balance right side */
+}
+
+/* optional: tighten vertical rhythm */
+.wp-block-navigation .has-child>.wp-block-navigation__submenu-container {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+/* ===================================== */
+/* NAVIGATION DROPDOWN — CONTAINED FIX   */
+/* ===================================== */
+
+/* Make the parent act as positioning context */
+.wp-block-navigation-item.has-child {
+    position: relative;
+}
+
+/* Style the parent link */
+.wp-block-navigation-item.has-child>a {
+    position: relative;
+    z-index: 20;
+    color: var(--wp--preset--color--dark-blue, #135a70) !important;
+    font-weight: 700;
+}
+
+/* Submenu container (anchored to parent) */
+.wp-block-navigation__submenu-container {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    /* small gap below "Oplossingen" */
+    left: 0;
+    background-color: var(--wp--preset--color--light-blue, #80bdd9) !important;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    min-width: 230px;
+    /* width matches design */
+    padding: 1.5rem 0 !important;
+    z-index: 10;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Submenu links */
+.wp-block-navigation__submenu-container a {
+    display: block;
+    color: var(--wp--preset--color--white, #ffffff) !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none !important;
+    letter-spacing: 0.5px;
+    padding: 0.45rem 1.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.wp-block-navigation__submenu-container li:last-child a {
+    border-bottom: none;
+}
+
+/* Hover/focus state */
+.wp-block-navigation__submenu-container a:hover,
+.wp-block-navigation__submenu-container a:focus-visible {
+    color: var(--wp--preset--color--dark-blue, #135a70) !important;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Keep "Oplossingen" visible above dropdown */
+.wp-block-navigation-item.has-child>a {
+    z-index: 25;
+}
+
+/* Arrow color */
+.wp-block-navigation__submenu-icon {
+    color: var(--wp--preset--color--dark-blue, #135a70) !important;
+}
+
+/* Nested submenus (second level+) still slide to the right */
+.wp-block-navigation__submenu-container .wp-block-navigation__submenu-container {
+    left: 100% !important;
+    top: 0 !important;
+    border-radius: 8px;
+    min-width: 200px;
+}
+
+.wp-block-navigation .has-child>.wp-block-navigation__submenu-container {
+    margin-left: -1.2rem !important;
+}
+
+/* ===================================== */
+/* DROPDOWN ARROW ABOVE MENU FIX         */
+/* ===================================== */
+
+.wp-block-navigation__submenu-icon {
+    position: relative !important;
+    z-index: 30 !important;
+    /* higher than submenu (10) and parent (25) */
+    pointer-events: none;
+    /* prevents hover flickering */
+}
+
+/* ===================================== */
+/* ROTATE DROPDOWN ARROW ON HOVER        */
+/* ===================================== */
+
+.wp-block-navigation__submenu-icon {
+    transition: transform 0.25s ease;
+    transform-origin: center;
+}
+
+/* Rotate the arrow when hovering over parent */
+.wp-block-navigation-item.has-child:hover>.wp-block-navigation__submenu-icon,
+.wp-block-navigation-item.has-child:focus-within>.wp-block-navigation__submenu-icon {
+    transform: rotate(180deg);
+}
+
+/* ===================================== */
+/* NORMALIZE PARENT LINK WEIGHT          */
+/* ===================================== */
+
+/* Reset "Oplossingen" (has dropdown) weight to match other items */
+.wp-block-navigation-item.has-child>a {
+    font-weight: 600 !important;
+    /* match your other nav links */
+}
+
+/* Optional: ensure consistent vertical alignment with arrow */
+.wp-block-navigation-item.has-child {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    /* small gap between text and arrow */
+}
+
+/* ===================================== */
+/* MOBILE NAVIGATION STYLING (Overlay)   */
+/* ===================================== */
+@media (max-width: 1100px) {
+
+    /* Overlay background */
+    .wp-block-navigation__responsive-container.is-menu-open {
+        background-color: var(--wp--preset--color--dark-blue, #135a70) !important;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 3rem 2rem;
+        text-align: center;
+    }
+
+    /* Individual menu items */
+    .wp-block-navigation__responsive-container .wp-block-navigation-item>a {
+        color: var(--wp--preset--color--white, #ffffff) !important;
+        font-weight: 700;
+        font-size: 1.15rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 0.8rem 0;
+        display: inline-block;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    /* Remove border from last item */
+    .wp-block-navigation__responsive-container .wp-block-navigation-item:last-child>a {
+        border-bottom: none;
+    }
+
+    /* Hover effect */
+    .wp-block-navigation__responsive-container .wp-block-navigation-item>a:hover {
+        color: var(--wp--preset--color--light-blue, #80bdd9) !important;
+        transform: translateY(-2px);
+    }
+
+    /* Submenu container (dropdown within overlay) */
+    .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        border-radius: 12px;
+        padding: 1rem 0;
+        margin-top: 0.5rem;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Submenu links */
+    .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container a {
+        color: #fff !important;
+        font-weight: 600;
+        padding: 0.6rem 1.25rem;
+        font-size: 1rem;
+        text-transform: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container li:last-child a {
+        border-bottom: none;
+    }
+
+    /* Submenu hover state */
+    .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container a:hover {
+        color: var(--wp--preset--color--light-blue, #80bdd9) !important;
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Dropdown arrow in mobile */
+    .wp-block-navigation__responsive-container .wp-block-navigation__submenu-icon {
+        color: var(--wp--preset--color--light-blue, #80bdd9) !important;
+        margin-left: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+
+    /* Rotate on open */
+    .wp-block-navigation__responsive-container .has-child:hover>.wp-block-navigation__submenu-icon {
+        transform: rotate(180deg);
+    }
+
+    /* Spacing between groups */
+    .wp-block-navigation__responsive-container .wp-block-navigation__container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 340px;
+    }
+
+    /* Close button */
+    .wp-block-navigation__responsive-container-close {
+        color: #fff !important;
+        font-size: 1.75rem !important;
+        position: absolute !important;
+        top: 1.25rem;
+        right: 1.25rem;
+    }
+}
+
+/* ===================================== */
+/* MOBILE DROPDOWN CLEAN REFINEMENT      */
+/* ===================================== */
+@media (max-width: 1100px) {
+
+    /* Make sure submenu stays above everything */
+    .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container {
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        background: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0.25rem 0 0.5rem !important;
+        z-index: 9999 !important;
+    }
+
+    /* Submenu links — simpler and cleaner */
+    .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container a {
+        display: block;
+        color: var(--wp--preset--color--white, #ffffff) !important;
+        font-weight: 600;
+        font-size: 1rem;
+        text-transform: none;
+        letter-spacing: 0.25px;
+        padding: 0.6rem 0;
+        text-align: center;
+        opacity: 0.9;
+        transition: opacity 0.2s ease, color 0.2s ease;
+    }
+
+    .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container a:hover {
+        color: var(--wp--preset--color--light-blue, #80bdd9) !important;
+        opacity: 1;
+    }
+
+    /* Parent item ("Oplossingen") and arrow stay above submenu */
+    .wp-block-navigation__responsive-container .has-child>a {
+        position: relative;
+        z-index: 10000 !important;
+        padding-bottom: 0.3rem;
+    }
+
+    /* Dropdown arrow styling and rotation */
+    .wp-block-navigation__responsive-container .wp-block-navigation__submenu-icon {
+        color: var(--wp--preset--color--light-blue, #80bdd9) !important;
+        margin-left: 0.4rem;
+        font-size: 1.1rem;
+        transition: transform 0.3s ease;
+    }
+
+    /* Rotate arrow on hover to indicate open state */
+    .wp-block-navigation__responsive-container .has-child:hover>.wp-block-navigation__submenu-icon {
+        transform: rotate(180deg);
+    }
+
+    /* Keep the dropdown items visually connected (small spacing) */
+    .wp-block-navigation__responsive-container .has-child:hover>.wp-block-navigation__submenu-container {
+        margin-top: -0.2rem;
+    }
+
+    /* Slight fade-in for dropdown */
+    .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container {
+        animation: submenuFade 0.25s ease;
+    }
+
+    @keyframes submenuFade {
+        from {
+            opacity: 0;
+            transform: translateY(-3px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
