@@ -2,3 +2,20 @@
   border: 1px dashed #ccc;
   padding: 1rem;
 }
+
+/* Let you click anywhere in the block to select it */
+.wp-block-bk-icon-feature .bk-icon-feature {
+  pointer-events: none;
+}
+
+.wp-block-bk-icon-feature .bk-icon-feature * {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Allow RichText fields to stay editable */
+.wp-block-bk-icon-feature .bk-icon-feature .bk-icon-feature__title,
+.wp-block-bk-icon-feature .bk-icon-feature .bk-icon-feature__text {
+  pointer-events: auto;
+  user-select: text;
+}

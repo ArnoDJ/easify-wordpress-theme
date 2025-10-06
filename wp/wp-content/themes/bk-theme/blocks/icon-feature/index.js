@@ -1,13 +1,8 @@
 (function (blocks, element, blockEditor, components, i18n, apiFetch) {
-    var el = element.createElement;
-    var __ = i18n.__;
-    var RichText = blockEditor.RichText;
-    var InspectorControls = blockEditor.InspectorControls;
-    var PanelBody = components.PanelBody;
-    var ToggleControl = components.ToggleControl;
-    var Button = components.Button;
-    var MediaUpload = blockEditor.MediaUpload;
-    var PanelColorSettings = blockEditor.PanelColorSettings;
+    const el = element.createElement;
+    const __ = i18n.__;
+    const { RichText, InspectorControls, MediaUpload, PanelColorSettings, useBlockProps } = blockEditor;
+    const { PanelBody, ToggleControl, Button } = components;
 
     blocks.registerBlockType('bk/icon-feature', {
         title: __('Icon Feature', 'bk'),
@@ -35,38 +30,33 @@
         },
 
         edit: function (props) {
-            var attrs = props.attributes;
+            const { attributes: attrs, setAttributes } = props;
+            const blockProps = useBlockProps({ className: 'bk-icon-feature' });
 
-            return el('div', { className: 'icon-feature' },
-                // Inspector controls
+            return el('div', blockProps,
+                // Sidebar controls
                 el(InspectorControls, {},
                     el(PanelBody, { title: __('Settings', 'bk'), initialOpen: true },
                         el(ToggleControl, {
                             label: __('Show Arrow', 'bk'),
                             checked: attrs.showArrow,
-                            onChange: function (val) {
-                                props.setAttributes({ showArrow: val });
-                            }
+                            onChange: (val) => setAttributes({ showArrow: val })
                         }),
                         el(MediaUpload, {
-                            onSelect: function (media) {
+                            onSelect: (media) => {
                                 if (media.mime === 'image/svg+xml') {
                                     fetch(media.url)
-                                        .then(function (res) { return res.text(); })
-                                        .then(function (svg) {
-                                            props.setAttributes({ iconSvg: svg });
-                                        });
+                                        .then((res) => res.text())
+                                        .then((svg) => setAttributes({ iconSvg: svg }));
                                 } else {
-                                    props.setAttributes({ iconSvg: '' });
+                                    setAttributes({ iconSvg: '' });
                                 }
                             },
                             allowedTypes: ['image/svg+xml'],
-                            render: function (obj) {
-                                return el(Button, {
-                                    onClick: obj.open,
-                                    isSecondary: true
-                                }, attrs.iconSvg ? __('Change Icon', 'bk') : __('Select Icon', 'bk'));
-                            }
+                            render: (obj) => el(Button, {
+                                onClick: obj.open,
+                                isSecondary: true
+                            }, attrs.iconSvg ? __('Change Icon', 'bk') : __('Select Icon', 'bk'))
                         })
                     ),
                     el(PanelColorSettings, {
@@ -74,29 +64,29 @@
                         colorSettings: [
                             {
                                 value: attrs.iconColor,
-                                onChange: function (color) { props.setAttributes({ iconColor: color }); },
+                                onChange: (color) => setAttributes({ iconColor: color }),
                                 label: __('Icon Color', 'bk')
                             },
                             {
                                 value: attrs.arrowColor,
-                                onChange: function (color) { props.setAttributes({ arrowColor: color }); },
+                                onChange: (color) => setAttributes({ arrowColor: color }),
                                 label: __('Arrow Color', 'bk')
                             },
                             {
                                 value: attrs.titleColor,
-                                onChange: function (color) { props.setAttributes({ titleColor: color }); },
+                                onChange: (color) => setAttributes({ titleColor: color }),
                                 label: __('Subtitle Color', 'bk')
                             },
                             {
                                 value: attrs.textColor,
-                                onChange: function (color) { props.setAttributes({ textColor: color }); },
+                                onChange: (color) => setAttributes({ textColor: color }),
                                 label: __('Text Color', 'bk')
                             }
                         ]
                     })
                 ),
 
-                // Media row: inline SVG icon + arrow
+                // Media: SVG icon + arrow
                 el('div', { className: 'bk-icon-feature__media' },
                     attrs.iconSvg &&
                         el('div', {
@@ -106,9 +96,9 @@
                         }),
                     attrs.showArrow &&
                         el('div', {
-                                className: 'bk-icon-feature__arrow',
-                                style: { color: attrs.arrowColor }
-                            },
+                            className: 'bk-icon-feature__arrow',
+                            style: { color: attrs.arrowColor }
+                        },
                             el('svg', {
                                 xmlns: 'http://www.w3.org/2000/svg',
                                 viewBox: '0 0 448 512',
@@ -128,21 +118,22 @@
                         )
                 ),
 
-                // Text content
+                // Title
                 el(RichText, {
                     tagName: 'h3',
                     className: 'bk-icon-feature__title',
                     value: attrs.title,
-                    onChange: function (val) { props.setAttributes({ title: val }); },
+                    onChange: (val) => setAttributes({ title: val }),
                     placeholder: __('Enter title…', 'bk'),
                     style: { color: attrs.titleColor }
                 }),
 
+                // Text
                 el(RichText, {
                     tagName: 'p',
                     className: 'bk-icon-feature__text',
                     value: attrs.text,
-                    onChange: function (val) { props.setAttributes({ text: val }); },
+                    onChange: (val) => setAttributes({ text: val }),
                     placeholder: __('Enter description…', 'bk'),
                     style: { color: attrs.textColor }
                 })
@@ -150,7 +141,7 @@
         },
 
         save: function (props) {
-            var attrs = props.attributes;
+            const attrs = props.attributes;
 
             return el('div', { className: 'bk-icon-feature' },
                 el('div', { className: 'bk-icon-feature__media' },
@@ -162,9 +153,9 @@
                         }),
                     attrs.showArrow &&
                         el('div', {
-                                className: 'bk-icon-feature__arrow',
-                                style: { color: attrs.arrowColor }
-                            },
+                            className: 'bk-icon-feature__arrow',
+                            style: { color: attrs.arrowColor }
+                        },
                             el('svg', {
                                 xmlns: 'http://www.w3.org/2000/svg',
                                 viewBox: '0 0 448 512',
@@ -176,18 +167,27 @@
                                 el('path', {
                                     fill: 'currentColor',
                                     d: 'M438.6 233.4l-160-160c-12.5-12.5-32.8-12.5-45.3 \
-        0s-12.5 32.8 0 45.3L338.8 224H32c-17.7 0-32 14.3-32 \
-        32s14.3 32 32 32h306.8l-105.5 105.4c-12.5 \
-        12.5-12.5 32.8 0 45.3s32.8 12.5 \
-        45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3z'
+0s-12.5 32.8 0 45.3L338.8 224H32c-17.7 0-32 14.3-32 \
+32s14.3 32 32 32h306.8l-105.5 105.4c-12.5 \
+12.5-12.5 32.8 0 45.3s32.8 12.5 \
+45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3z'
                                 })
                             )
                         )
                 ),
-                el(RichText.Content, { tagName: 'h3', className: 'bk-icon-feature__title', value: attrs.title, style: { color: attrs.titleColor } }),
-                el(RichText.Content, { tagName: 'p', className: 'bk-icon-feature__text', value: attrs.text, style: { color: attrs.textColor } })
+                el(RichText.Content, {
+                    tagName: 'h3',
+                    className: 'bk-icon-feature__title',
+                    value: attrs.title,
+                    style: { color: attrs.titleColor }
+                }),
+                el(RichText.Content, {
+                    tagName: 'p',
+                    className: 'bk-icon-feature__text',
+                    value: attrs.text,
+                    style: { color: attrs.textColor }
+                })
             );
         }
-
     });
 })(window.wp.blocks, window.wp.element, window.wp.blockEditor, window.wp.components, window.wp.i18n, window.wp.apiFetch);
