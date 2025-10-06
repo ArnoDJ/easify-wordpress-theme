@@ -384,6 +384,6 @@ form input[type="submit"]:hover {
     /* default = text color */
 }
 
-.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex {
-    gap: 0 !important;
+.wp-block-group.is-layout-constrained>*+* {
+    margin-top: var(--wp--style--block-gap, 1.5rem);
 }

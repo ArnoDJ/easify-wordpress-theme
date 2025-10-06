@@ -114,3 +114,14 @@ body {
     margin-right: 0.25em;
     vertical-align: middle;
 }
+
+/* Make sure Row blocks respect the global block gap */
+.wp-block-row.is-layout-flex {
+    display: flex;
+    gap: var(--wp--style--block-gap, 1.5rem);
+    flex-wrap: wrap;
+}
+
+.wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex {
+    gap: var(--wp--style--block-gap, 1.5rem);
+}
