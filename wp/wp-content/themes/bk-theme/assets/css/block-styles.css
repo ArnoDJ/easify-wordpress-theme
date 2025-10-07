@@ -376,7 +376,7 @@ form input[type="submit"]:hover {
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     display: inline-block;
-    margin-right: 0.35em;
+    margin-right: 0.6em;
 
     font-size: inherit;
     line-height: inherit;
@@ -386,4 +386,108 @@ form input[type="submit"]:hover {
 
 .wp-block-group.is-layout-constrained>*+* {
     margin-top: var(--wp--style--block-gap, 1.5rem);
+}
+
+/* ==========================================================
+   BK Newsletter Footer — Standalone version
+   ========================================================== */
+
+.bk-newsletter-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+
+    gap: 0.5rem;
+    box-sizing: border-box;
+    margin-top: 2rem;
+}
+
+/* Input field */
+.bk-newsletter-footer input[type="email"] {
+    flex: 1;
+    border: none;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 999px;
+    outline: none;
+    color: var(--wp--preset--color--primary, #0b5c6b);
+    background: #fff;
+    box-sizing: border-box;
+    margin-bottom: 0;
+}
+
+.bk-newsletter-footer input[type="email"]::placeholder {
+    color: var(--wp--preset--color--primary, #0b5c6b);
+    opacity: 0.6;
+}
+
+/* Button */
+.bk-newsletter-footer button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    border: none;
+    border-radius: 999px;
+    background: var(--wp--preset--color--dark-blue, #0b5c6b);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+    position: relative;
+    margin-left: -3rem;
+    /* slight overlap with input */
+    z-index: 1;
+}
+
+.bk-newsletter-footer button:hover {
+    background: var(--wp--preset--color--accent-dark, #e09a15);
+    transform: translateY(-2px);
+}
+
+/* Icon inside button */
+.bk-newsletter-footer i {
+    margin-left: 0.5rem;
+    font-size: 1rem;
+    color: white;
+}
+
+/* ==========================================================
+   Responsive adjustments
+   ========================================================== */
+
+@media (max-width: 800px) {
+    .bk-newsletter-footer {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .bk-newsletter-footer {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: stretch;
+    }
+
+    .bk-newsletter-footer input[type="email"] {
+        border-radius: 999px;
+        margin: 0;
+    }
+
+    .bk-newsletter-footer button {
+        margin-left: 0;
+        border-radius: 999px;
+        width: 100%;
+        transform: none;
+    }
 }

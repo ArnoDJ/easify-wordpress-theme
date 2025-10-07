@@ -1,8 +1,67 @@
-.pill-button {
+/* ==========================================================
+   Pill Button Base
+   ========================================================== */
+
+.pill {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
     border-radius: 9999px;
-    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    gap: 0.5rem;
+}
+
+/* ==========================================================
+   Padding sizes (controlled via editor)
+   ========================================================== */
+
+.pill--small {
+    padding: 0.5rem 1.2rem;
+}
+
+.pill--normal {
+    padding: 0.9rem 1.8rem;
+}
+
+.pill--large {
+    padding: 1.3rem 2.4rem;
+}
+
+/* ==========================================================
+   Interaction + layout
+   ========================================================== */
+
+.pill:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pill-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+.pill-icon svg {
+    width: 1.75rem;
+    height: 1.75rem;
+    display: block;
+}
+
+.pill-text {
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Responsive adjustment */
+@media (max-width: 600px) {
+    .pill {
+        width: 100%;
+        justify-content: center;
+    }
 }
