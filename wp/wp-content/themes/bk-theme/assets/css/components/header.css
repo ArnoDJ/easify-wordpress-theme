@@ -190,18 +190,6 @@
         color: #fff !important;
     }
 
-    /* Make the top bar a proper row & a positioning context */
-    .bk-topbar>.container {
-        position: relative;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
-        gap: 10px;
-        height: 56px !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-
     /* 1) Desktop topbar nav goes away on mobile */
     .bk-topbar .topbar-nav {
         display: none !important;
@@ -209,17 +197,7 @@
 
     /* 2) Use the HEADER nav as the hamburger */
     /* Place its button inside the top bar, to the left of "nl" */
-    .bk-header-main .header-nav {
-        position: absolute !important;
-        top: 50% !important;
-        right: calc(var(--container-pad) + 24px) !important;
-        /* just left of language */
-        transform: translateY(-50%) !important;
-        display: inline-flex !important;
-        align-items: center;
-        margin: 0 !important;
-        z-index: 5;
-    }
+    .bk-header-main .header-nav {}
 
     .bk-header-main .header-nav:not(.is-menu-open) .wp-block-navigation__container {
         display: none !important;
@@ -275,22 +253,13 @@
         color: #fff !important;
     }
 
-    /* make the top bar a tidy row and leave room for the fixed button */
-    .bk-topbar>.container {
-        position: relative;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
-        gap: 10px;
-        height: 56px !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        padding-right: calc(var(--container-pad) + 44px) !important;
-        /* space for the fixed button */
-    }
-
     /* reset header nav so WP can manage overlay normally */
     .bk-header-main .header-nav {
+        right: calc(var(--container-pad) + 24px) !important;
+        /* just left of language */
+        display: inline-flex !important;
+        align-items: center;
+        z-index: 5;
         position: static !important;
         margin: 0 !important;
         transform: none !important;
@@ -369,7 +338,15 @@
 
     /* Don't reserve space on the right; let "nl" hug the edge */
     .bk-topbar>.container {
-        padding-right: 0 !important;
+        position: relative;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 10px;
+        height: 56px !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        padding-right: calc(var(--container-pad) + 44px) !important;
     }
 
     /* Put the burger just to the LEFT of "nl" */
@@ -459,7 +436,6 @@
 /* Lower submenu panel slightly so the link stays visible */
 .wp-block-navigation__submenu-container {
     position: absolute;
-    padding-left: 1rem !important;
     z-index: 10;
     /* below the link but above other layout elements */
 }
@@ -482,28 +458,15 @@
 
 /* --- Add breathing room inside the dropdown --- */
 .wp-block-navigation .has-child>.wp-block-navigation__submenu-container {
-    padding: 1.5rem 2rem 1.5rem 1.5rem !important;
+    padding: 1.5rem 2rem 1.5rem 0 !important;
     /* top, right, bottom, left */
-}
-
-.wp-block-navigation__submenu-container a {
-    padding-left: 0.75rem;
-    /* gentle inner left spacing */
 }
 
 /* Keep submenu perfectly aligned under parent */
 .wp-block-navigation .has-child>.wp-block-navigation__submenu-container {
     left: 0 !important;
     margin-left: 0 !important;
-    padding: 1.5rem 0 !important;
     /* only top/bottom padding, no left/right */
-}
-
-/* Give inner breathing room to links, not container */
-.wp-block-navigation__submenu-container a {
-    display: block;
-    padding: 0.35rem 1.5rem;
-    /* vertical, horizontal spacing for text */
 }
 
 /* === Kill all horizontal offsets for first-level dropdowns === */
@@ -567,6 +530,7 @@
 /* Submenu links */
 .wp-block-navigation__submenu-container a {
     display: block;
+    padding-left: 0.75rem;
     color: var(--wp--preset--color--white, #ffffff) !important;
     font-weight: 600;
     text-transform: uppercase;
@@ -592,17 +556,11 @@
     z-index: 25;
 }
 
-/* Arrow color */
-.wp-block-navigation__submenu-icon {
-    color: var(--wp--preset--color--dark-blue, #135a70) !important;
-}
-
 /* Nested submenus (second level+) still slide to the right */
 .wp-block-navigation__submenu-container .wp-block-navigation__submenu-container {
     left: 100% !important;
     top: 0 !important;
     border-radius: 8px;
-    min-width: 200px;
 }
 
 .wp-block-navigation .has-child>.wp-block-navigation__submenu-container {
@@ -610,22 +568,14 @@
 }
 
 /* ===================================== */
-/* DROPDOWN ARROW ABOVE MENU FIX         */
-/* ===================================== */
-
-.wp-block-navigation__submenu-icon {
-    position: relative !important;
-    z-index: 30 !important;
-    /* higher than submenu (10) and parent (25) */
-    pointer-events: none;
-    /* prevents hover flickering */
-}
-
-/* ===================================== */
 /* ROTATE DROPDOWN ARROW ON HOVER        */
 /* ===================================== */
 
 .wp-block-navigation__submenu-icon {
+    color: var(--wp--preset--color--dark-blue, #135a70) !important;
+    position: relative !important;
+    z-index: 30 !important;
+    pointer-events: none;
     transition: transform 0.25s ease;
     transform-origin: center;
 }
@@ -655,7 +605,7 @@
 }
 
 /* ===================================== */
-/* MOBILE NAVIGATION STYLING (Overlay)   */
+/* MOBILE DROPDOWN CLEAN REFINEMENT      */
 /* ===================================== */
 @media (max-width: 1100px) {
 
@@ -752,12 +702,6 @@
         top: 1.25rem;
         right: 1.25rem;
     }
-}
-
-/* ===================================== */
-/* MOBILE DROPDOWN CLEAN REFINEMENT      */
-/* ===================================== */
-@media (max-width: 1100px) {
 
     /* Make sure submenu stays above everything */
     .wp-block-navigation__responsive-container .wp-block-navigation__submenu-container {
@@ -831,4 +775,13 @@
             transform: translateY(0);
         }
     }
+}
+
+.wp-block-navigation .wp-block-navigation-item__label:hover {
+    cursor: pointer;
+    color: var(--wp--preset--color--yellow, #fdbb30) !important;
+}
+
+.wp-block-navigation .wp-block-navigation-item__label {
+    margin-left: 3rem
 }

@@ -8,6 +8,13 @@
           "fontWeight": true
         }
       },
+      "core/stack": {
+        "layout": {
+          "allowSwitching": true,
+          "allowVerticalAlignment": true,
+          "allowJustification": true
+        }
+      },
       "core/image": {
         "dimensions": {
           "width": true,
