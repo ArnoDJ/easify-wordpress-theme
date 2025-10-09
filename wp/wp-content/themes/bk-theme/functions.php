@@ -283,3 +283,14 @@ add_action('admin_footer', function () {
 	<?php
 });
 
+// =======================================================
+// Load persistent arrow color support inside editor iframe
+// =======================================================
+add_action('enqueue_block_editor_assets', function () {
+    wp_enqueue_style(
+        'bk-theme-editor-arrow-style',
+        get_stylesheet_directory_uri() . '/assets/css/editor-arrow.css',
+        [],
+        filemtime(get_stylesheet_directory() . '/assets/css/editor-arrow.css')
+    );
+});

@@ -156,24 +156,46 @@ h3.wp-block-heading.is-style-hero-title {
     margin-right: calc(-1 * var(--bk-bleed-x-l));
 }
 
+.is-style-leading-arrow {
+    position: relative;
+}
+
+.is-style-leading-arrow::before {
+    content: "\f061";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    display: inline-block;
+    margin-right: 0.6em;
+    color: var(--arrow-color, currentColor);
+    font-style: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.is-style-leading-arrow.has-text-color::before {
+    color: var(--wp--style--color--text, currentColor);
+}
+
 /* ===================================== */
-/* PARAGRAPH BLOCK STYLE: LEADING ARROW */
+/* LEADING ARROW STYLE (Frontend) */
 /* ===================================== */
 
 .is-style-leading-arrow {
     position: relative;
 }
 
-/* Arrow itself */
-.editor-styles-wrapper .is-style-leading-arrow::before,
 .is-style-leading-arrow::before {
     content: "\f061";
-    font-family: "Font Awesome 6 Free", "Font Awesome 5 Free";
+    font-family: "Font Awesome 6 Free";
     font-weight: 900;
     display: inline-block;
     margin-right: 0.6em;
-    color: var(--arrow-color, var(--wp--style--color--text, currentColor)) !important;
+    color: var(--arrow-color, currentColor);
     font-style: normal;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
+}
+
+.is-style-leading-arrow.has-text-color::before {
+    color: var(--wp--style--color--text, currentColor);
 }

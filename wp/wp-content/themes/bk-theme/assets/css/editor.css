@@ -50,18 +50,16 @@
 }
 
 /* ===================================== */
-/* Paragraph block style: Leading Arrow */
+/* LEADING ARROW STYLE (Editor) */
 /* ===================================== */
 
-/* Base style for the leading arrow */
 .editor-styles-wrapper .is-style-leading-arrow {
     position: relative;
 }
 
-/* Force the pseudo-element arrow to display inside the editor */
 .editor-styles-wrapper .is-style-leading-arrow::before {
     content: "\f061";
-    /* Unicode for arrow-right */
+    /* Font Awesome arrow-right */
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     display: inline-block;
@@ -72,18 +70,6 @@
     -webkit-font-smoothing: antialiased;
 }
 
-/* Sync with WordPress text color setting */
 .editor-styles-wrapper .is-style-leading-arrow.has-text-color::before {
     color: var(--wp--style--color--text, currentColor);
-}
-
-/* Explicitly apply inline variable if present on the block */
-.editor-styles-wrapper [data-block][style*="--arrow-color"] .is-style-leading-arrow::before {
-    color: inherit !important;
-    /* inherit from --arrow-color if defined */
-}
-
-/* Fallback for browsers that ignore the variable inheritance */
-.editor-styles-wrapper [data-block][style*="--arrow-color"] .is-style-leading-arrow {
-    color: var(--arrow-color) !important;
 }

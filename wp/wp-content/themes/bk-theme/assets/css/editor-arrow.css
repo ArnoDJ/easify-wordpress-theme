@@ -1,0 +1,16 @@
+/* Persistent Arrow Color Support (inside Gutenberg iframe) */
+.editor-styles-wrapper .is-style-leading-arrow::before {
+    content: "\f061";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    display: inline-block;
+    margin-right: 0.4em;
+    color: var(--arrow-color, currentColor);
+    font-style: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.editor-styles-wrapper .is-style-leading-arrow.has-text-color::before {
+    color: var(--wp--style--color--text, currentColor);
+}
