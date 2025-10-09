@@ -1,10 +1,9 @@
 const { addFilter } = wp.hooks;
-const { InspectorControls, RichTextToolbarButton } = wp.blockEditor;
-const { PanelBody, CheckboxControl, SelectControl } = wp.components;
+const { InspectorControls } = wp.blockEditor;
+const { PanelBody, CheckboxControl, SelectControl, ColorPalette } = wp.components;
 const { createHigherOrderComponent } = wp.compose;
 const { Fragment, createElement, RawHTML } = wp.element;
 const { __ } = wp.i18n;
-const { registerFormatType, applyFormat, removeFormat } = wp.richText;
 
 console.log('🔥 bk-theme editor.js loaded ✅');
 
@@ -116,9 +115,7 @@ addFilter(
 	'editor.BlockListBlock',
 	'bk-theme/apply-image-classes-editor',
 	(BlockListBlock) => (props) => {
-		if (props.name !== 'core/image') {
-			return createElement(BlockListBlock, props);
-		}
+		if (props.name !== 'core/image') return createElement(BlockListBlock, props);
 
 		const { bleedUp, bleedDown, bleedLeft, bleedRight, bleedSize, hideOnMobile } = props.attributes;
 		const extraClasses = [];
@@ -140,20 +137,15 @@ addFilter(
 // =======================================================
 // HERO CTA BUTTON ARROW
 // =======================================================
-
 const withHeroCtaArrow = createHigherOrderComponent((BlockEdit) => {
 	return (props) => {
-		if (props.name !== 'core/button') {
-			return createElement(BlockEdit, props);
-		}
+		if (props.name !== 'core/button') return createElement(BlockEdit, props);
 
 		const { attributes } = props;
 		const { className = '' } = attributes;
 		const isHeroCta = className.includes('is-style-hero-cta');
 
-		if (!isHeroCta) {
-			return createElement(BlockEdit, props);
-		}
+		if (!isHeroCta) return createElement(BlockEdit, props);
 
 		return createElement(
 			'div',
@@ -163,10 +155,10 @@ const withHeroCtaArrow = createHigherOrderComponent((BlockEdit) => {
 				RawHTML,
 				{},
 				`
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
-                </svg>
-            `
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+					<path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h370.7l-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+				</svg>
+			`
 			)
 		);
 	};
@@ -176,7 +168,6 @@ addFilter('editor.BlockEdit', 'bk-theme/with-hero-cta-arrow', withHeroCtaArrow);
 
 addFilter('blocks.getSaveContent.extraProps', 'bk-theme/apply-hero-cta-arrow', (extraProps, blockType, attributes) => {
 	if (blockType.name !== 'core/button') return extraProps;
-
 	const { className = '' } = attributes;
 	if (!className.includes('is-style-hero-cta')) return extraProps;
 
@@ -185,109 +176,162 @@ addFilter('blocks.getSaveContent.extraProps', 'bk-theme/apply-hero-cta-arrow', (
 });
 
 // =======================================================
-// CONTENT BUBBLE DETECTION (dynamic class)
+// REGISTER ARROW COLOR ATTRIBUTE FOR PARAGRAPH
+// =======================================================
+const addArrowColorAttribute = (settings, name) => {
+	if (name !== 'core/paragraph') return settings;
+
+	settings.attributes = Object.assign({}, settings.attributes, {
+		arrowColor: {
+			type: 'string',
+			default: '',
+		},
+	});
+
+	return settings;
+};
+
+addFilter('blocks.registerBlockType', 'bk-theme/add-arrow-color-attribute', addArrowColorAttribute);
+
+// =======================================================
+// PARAGRAPH STYLE: LIVE PREVIEW FOR LEADING ARROW
 // =======================================================
 wp.domReady(() => {
 	wp.data.subscribe(() => {
 		const blocks = wp.data.select('core/block-editor').getBlocks();
 		blocks.forEach((block) => {
-			if (block.name === 'bk-theme/content-bubble') {
-				const hasBleedImage = block.innerBlocks.some(
-					(child) =>
-						child.name === 'core/image' &&
-						child.attributes.className &&
-						child.attributes.className.includes('is-style-bleed-')
-				);
+			if (block.name === 'core/paragraph') {
 				const el = document.querySelector(`[data-block="${block.clientId}"]`);
-				if (el) {
-					el.classList.toggle('has-image-bleed', hasBleedImage);
-				}
+				if (!el) return;
+				el.classList.toggle(
+					'is-style-leading-arrow',
+					block.attributes.className?.includes('is-style-leading-arrow')
+				);
 			}
 		});
 	});
 });
 
 // =======================================================
-// CUSTOM RICHTEXT FORMAT: LEADING ARROW WITH COLOR CONTROL
+// PARAGRAPH STYLE: LEADING ARROW COLOR CONTROL
 // =======================================================
 wp.domReady(() => {
-	const { PanelBody, SelectControl } = wp.components;
-	const { InspectorControls } = wp.blockEditor;
 	const { Fragment, createElement } = wp.element;
+	const { PanelBody, ColorPalette } = wp.components;
+	const { InspectorControls } = wp.blockEditor;
 
-	const ArrowIcon = createElement(
-		'svg',
-		{ width: 20, height: 20, viewBox: '0 0 24 24', xmlns: 'http://www.w3.org/2000/svg' },
-		createElement('path', { d: 'M14 5l-7 7 7 7' })
-	);
+	const withArrowColorControl = createHigherOrderComponent((BlockEdit) => {
+		return (props) => {
+			if (props.name !== 'core/paragraph') return createElement(BlockEdit, props);
 
-	registerFormatType('bk-theme/leading-arrow', {
-		title: __('Leading Arrow', 'bk-theme'),
-		tagName: 'span',
-		className: 'leading-arrow',
-		attributes: {
-			style: 'style',
-		},
-		edit({ isActive, value, onChange, activeAttributes }) {
-			const colorOptions = [
-				{ label: 'Default (text color)', value: '' },
-				{ label: 'Yellow', value: 'var(--wp--preset--color--yellow)' },
-				{ label: 'Dark Blue', value: 'var(--wp--preset--color--dark-blue)' },
-				{ label: 'Light Blue', value: 'var(--wp--preset--color--light-blue)' },
-				{ label: 'White', value: 'var(--wp--preset--color--white)' },
-				{ label: 'Black', value: 'var(--wp--preset--color--black)' },
-			];
+			const { attributes, setAttributes } = props;
+			const className = attributes.className || '';
+			const isLeadingArrow = className.includes('is-style-leading-arrow');
 
-			const currentStyle = activeAttributes.style || '';
-			const currentColor =
-				colorOptions.find((opt) => currentStyle.includes(opt.value))?.value || '';
+			if (!isLeadingArrow) return createElement(BlockEdit, props);
+
+			const currentColor = attributes.arrowColor || '';
+
+			const colors =
+				wp.data.select('core/block-editor').getSettings().colors || [
+					{ name: 'Dark Blue', color: '#135a70' },
+					{ name: 'Yellow', color: '#fdbb30' },
+					{ name: 'Light Blue', color: '#80bdd9' },
+					{ name: 'White', color: '#ffffff' },
+					{ name: 'Black', color: '#000000' },
+				];
 
 			return createElement(
 				Fragment,
 				{},
-				createElement(RichTextToolbarButton, {
-					icon: ArrowIcon,
-					title: __('Toggle Leading Arrow', 'bk-theme'),
-					onClick: () => {
-						if (isActive) {
-							onChange(removeFormat(value, 'bk-theme/leading-arrow', 0, 1));
-						} else {
-							onChange(applyFormat(value, { type: 'bk-theme/leading-arrow' }, 0, 1));
-						}
-					},
-					isActive,
-				}),
-				isActive &&
+				createElement(BlockEdit, props),
+				createElement(
+					InspectorControls,
+					{},
 					createElement(
-						InspectorControls,
-						{},
-						createElement(
-							PanelBody,
-							{ title: __('Arrow Color', 'bk-theme'), initialOpen: true },
-							createElement(SelectControl, {
-								label: __('Choose arrow color', 'bk-theme'),
-								value: currentColor,
-								options: colorOptions,
-								onChange: (newValue) => {
-									const newStyle = newValue
-										? `--arrow-color: ${newValue};`
-										: '';
-									onChange(
-										applyFormat(
-											value,
-											{
-												type: 'bk-theme/leading-arrow',
-												attributes: { style: newStyle },
-											},
-											0,
-											value.text.length
-										)
-									);
-								},
-							})
-						)
+						PanelBody,
+						{ title: 'Arrow Color', initialOpen: true },
+						createElement(ColorPalette, {
+							colors,
+							value: currentColor,
+							onChange: (newColor) => setAttributes({ arrowColor: newColor }),
+						})
 					)
+				)
 			);
-		},
-	});
+		};
+	}, 'withArrowColorControl');
+
+	wp.hooks.addFilter('editor.BlockEdit', 'bk-theme/with-arrow-color-control', withArrowColorControl);
+
+	// Apply the color to both editor + frontend output
+	wp.hooks.addFilter(
+		'blocks.getSaveContent.extraProps',
+		'bk-theme/add-arrow-color-prop',
+		(extraProps, blockType, attributes) => {
+			if (blockType.name !== 'core/paragraph') return extraProps;
+			if (!attributes.arrowColor) return extraProps;
+			if (!attributes.className?.includes('is-style-leading-arrow')) return extraProps;
+
+			extraProps.style = Object.assign({}, extraProps.style, {
+				'--arrow-color': attributes.arrowColor,
+			});
+			return extraProps;
+		}
+	);
+});
+
+// =======================================================
+// FINAL. ACTUAL. FIX. 🔥
+// Force live arrow color updates even in Gutenberg iframe.
+// =======================================================
+wp.domReady(() => {
+	const { subscribe, select } = wp.data;
+	let lastInjectedCSS = '';
+
+	const injectArrowColors = () => {
+		const blocks = select('core/block-editor').getBlocks();
+		const css = blocks
+			.filter(
+				(b) =>
+					b.name === 'core/paragraph' &&
+					b.attributes.className?.includes('is-style-leading-arrow') &&
+					b.attributes.arrowColor
+			)
+			.map(
+				(b) => `
+				[data-block="${b.clientId}"].is-style-leading-arrow::before,
+				[data-block="${b.clientId}"] .is-style-leading-arrow::before {
+					color: ${b.attributes.arrowColor} !important;
+				}
+			`
+			)
+			.join('\n');
+
+		if (css === lastInjectedCSS) return;
+		lastInjectedCSS = css;
+
+		// Look for the iframe or fallback to root editor DOM
+		const iframe =
+			document.querySelector('iframe[name="editor-canvas"]') ||
+			document.querySelector('.block-editor-writing-flow') ||
+			document.querySelector('.editor-styles-wrapper');
+
+		if (!iframe) return;
+
+		const doc = iframe.contentDocument || document;
+
+		let styleEl = doc.getElementById('bk-arrow-live-style');
+		if (!styleEl) {
+			styleEl = doc.createElement('style');
+			styleEl.id = 'bk-arrow-live-style';
+			doc.head.appendChild(styleEl);
+		}
+
+		styleEl.textContent = css;
+	};
+
+	// Run initially + on every change
+	subscribe(injectArrowColors);
+	injectArrowColors();
 });

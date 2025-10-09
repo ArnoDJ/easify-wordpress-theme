@@ -1,0 +1,26 @@
+{
+  "apiVersion": 2,
+  "name": "bk-theme/side-image-content-block",
+  "title": "Side Image Content Block",
+  "category": "design",
+  "icon": "align-wide",
+  "description": "A full-width section with an image on one side and content on the other.",
+  "supports": {
+    "align": [ "full" ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "attributes": {
+    "imageUrl": { "type": "string", "default": "" },
+    "imageAlt": { "type": "string", "default": "" },
+    "imageSide": { "type": "string", "default": "right" },
+    "minHeight": { "type": "string", "default": "400px" },
+    "overlayColor": { "type": "string", "default": "rgba(0,0,0,0.3)" },
+    "overlayOpacity": { "type": "number", "default": 0.3 }
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css",
+  "style": "file:./style.css"
+}

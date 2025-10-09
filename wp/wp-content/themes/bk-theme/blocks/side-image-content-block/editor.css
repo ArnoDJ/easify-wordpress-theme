@@ -1,0 +1,69 @@
+.side-image-block {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+    border: 1px dashed #ddd;
+    border-top-left-radius: 36px;
+    border-bottom-left-radius: 36px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .08);
+}
+
+.side-image-block__image,
+.side-image-block__content {
+    flex: 1 1 50%;
+    min-height: 200px;
+}
+
+.side-image-block__content {
+    padding: 40px;
+}
+
+@media (max-width: 768px) {
+    .side-image-block {
+        flex-direction: column;
+    }
+}
+
+/* ============================================================
+   FIX: Clickable editor area for Side Image Content Block
+   ============================================================ */
+
+.editor-styles-wrapper .side-image-block__image,
+.editor-styles-wrapper .side-image-block__overlay,
+.editor-styles-wrapper .side-image-block__image img {
+    pointer-events: none !important;
+}
+
+.editor-styles-wrapper .side-image-block__content {
+    position: relative;
+    z-index: 5;
+    pointer-events: auto;
+}
+
+/* Let editor clicks go through, except for upload areas */
+.editor-styles-wrapper .side-image-block__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Prevent image area from blocking block selection */
+.editor-styles-wrapper .side-image-block__image {
+    position: relative;
+    z-index: 1;
+}
+
+/* Only interactive where upload/edit button is present */
+.editor-styles-wrapper .side-image-block__upload-area button,
+.editor-styles-wrapper .side-image-block__edit-button button {
+    pointer-events: auto;
+    z-index: 10;
+}
+
+/* Help visualize selection */
+.editor-styles-wrapper .side-image-block {
+    outline: 1px dashed #bbb;
+    outline-offset: -1px;
+}

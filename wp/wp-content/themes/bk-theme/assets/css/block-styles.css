@@ -2,7 +2,6 @@
 /* HERO TYPOGRAPHY */
 /* ===================================== */
 
-/* TITLE — bigger, lighter, tighter line-height */
 .is-style-hero-title {
     color: var(--wp--preset--color--dark-blue, #135a70);
     font-weight: 400;
@@ -11,7 +10,6 @@
     font-size: 8rem;
 }
 
-/* Wins over has-*-font-size classes */
 h1.wp-block-heading.is-style-hero-title,
 h2.wp-block-heading.is-style-hero-title,
 h3.wp-block-heading.is-style-hero-title {
@@ -19,7 +17,6 @@ h3.wp-block-heading.is-style-hero-title {
     line-height: 1.05;
 }
 
-/* If the heading has an inline font-size (custom numeric), force it */
 .wp-block-heading.is-style-hero-title[style*="font-size"],
 .wp-block-heading.is-style-hero-title[class*="-font-size"] {
     font-size: 6rem !important;
@@ -32,7 +29,7 @@ h3.wp-block-heading.is-style-hero-title {
     line-height: 1.15;
 }
 
-/* BODY — a hair darker than default black */
+/* BODY — slightly darker text */
 .is-style-hero-body {
     color: rgba(0, 0, 0, .84);
     line-height: 1.6;
@@ -40,12 +37,12 @@ h3.wp-block-heading.is-style-hero-title {
     margin: 0 0 1.25rem 0;
 }
 
-/* BUTTONS ROW — compact gap */
+/* BUTTON ROW */
 .is-style-hero-buttons {
     gap: .75rem;
 }
 
-/* CTA BUTTON FIX (with Font Awesome arrow-right via CSS) */
+/* CTA BUTTON FIX */
 .is-style-hero-cta .wp-block-button__link {
     display: inline-flex;
     align-items: center;
@@ -97,10 +94,9 @@ h3.wp-block-heading.is-style-hero-title {
 }
 
 /* ===================================== */
-/* IMAGE BLEED HELPERS (for wp-block-image) */
+/* IMAGE BLEED HELPERS */
 /* ===================================== */
 
-/* Variables */
 :root {
     --bk-bleed-y-s: 40px;
     --bk-bleed-y-m: 80px;
@@ -110,7 +106,6 @@ h3.wp-block-heading.is-style-hero-title {
     --bk-bleed-x-l: 120px;
 }
 
-/* Base bleed classes */
 .wp-block-image.bleed-up {
     margin-top: calc(-1 * var(--bk-bleed-y-m));
 }
@@ -162,332 +157,23 @@ h3.wp-block-heading.is-style-hero-title {
 }
 
 /* ===================================== */
-/* COLUMNS LAYOUT FIXES */
+/* PARAGRAPH BLOCK STYLE: LEADING ARROW */
 /* ===================================== */
 
-/* Respect editor column widths */
-.wp-block-columns>.wp-block-column[style*="flex-basis"] {
-    flex-grow: 0 !important;
-    flex-shrink: 0 !important;
-    max-width: unset !important;
+.is-style-leading-arrow {
+    position: relative;
 }
 
-/* Force wrapping */
-.wp-block-columns {
-    flex-wrap: wrap;
-    gap: clamp(16px, 2vw, 32px);
-}
-
-/* Tablet */
-@media (max-width: 1024px) {
-    .wp-block-columns>.wp-block-column {
-        flex-grow: 1 !important;
-        flex-shrink: 1 !important;
-        flex-basis: 45% !important;
-        max-width: 45% !important;
-    }
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-    .wp-block-columns>.wp-block-column {
-        flex-grow: 1 !important;
-        flex-shrink: 1 !important;
-        flex-basis: 100% !important;
-        max-width: 100% !important;
-    }
-}
-
-/* Inline width columns */
-.wp-block-columns>.wp-block-column[style*="flex-basis"] {
-    flex-grow: 0 !important;
-    flex-shrink: 0 !important;
-    width: auto !important;
-    max-width: none !important;
-}
-
-@media (max-width: 1024px) {
-    .wp-block-columns:not([style*="flex-basis"])>.wp-block-column {
-        flex-grow: 1 !important;
-        flex-shrink: 1 !important;
-        flex-basis: 45% !important;
-        max-width: 45% !important;
-    }
-}
-
-@media (max-width: 600px) {
-    .wp-block-columns:not([style*="flex-basis"])>.wp-block-column {
-        flex-grow: 1 !important;
-        flex-shrink: 1 !important;
-        flex-basis: 100% !important;
-        max-width: 100% !important;
-    }
-}
-
-/* Mobile image hiding */
-@media (max-width: 782px) {
-    .wp-block-image.hide-on-mobile {
-        display: none !important;
-    }
-}
-
-/* Editor tweak */
-.block-editor-block-list__block {
-    align-items: flex-start !important;
-}
-
-.accordion-item {
-    border-bottom: 1px solid #8cb0c0;
-}
-
-.accordion-header {
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    font-size: 1.3rem;
-    color: #62a3c8;
-    padding: 12px 0;
-}
-
-.accordion-icon {
-    font-size: 1.5rem;
-    color: #f5a623;
-    transition: transform 0.2s ease;
-}
-
-.accordion-item.open .accordion-icon {
-    transform: rotate(180deg);
-}
-
-.accordion-content {
-    background: #f5f9fb;
-    padding: 20px;
-    display: none;
-}
-
-.accordion-item.open .accordion-content {
-    display: block;
-    animation: dropdown 0.3s ease;
-}
-
-@keyframes dropdown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* When image + text sit side-by-side */
-.wp-block-image.alignleft,
-.wp-block-image.alignright {
-    margin: 0 2rem 1rem 0;
-    /* spacing */
-}
-
-/* Constrain image size consistently */
-.wp-block-image img {
-    height: auto;
-    max-width: 400px;
-    /* adjust to match XD mockup */
-    width: 100%;
-    display: block;
-}
-
-/* Keep text column readable */
-.two-col-text {
-    max-width: 600px;
-    /* adjust to match XD */
-}
-
-/* Align image top with heading */
-.wp-block-columns.is-style-two-col {
-    align-items: flex-start;
-}
-
-/* Make sure image and text align top */
-.is-style-two-col {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 2rem;
-}
-
-/* Left column image */
-.is-style-two-col .wp-block-image {
-    flex: 0 0 auto;
-    max-width: 400px;
-    /* match design */
-}
-
-/* Right column text */
-.is-style-two-col>*:not(.wp-block-image) {
-    flex: 1 1 auto;
-    max-width: 600px;
-    /* prevent text column from stretching too wide */
-}
-
-/* Rounded inputs */
-form input,
-form textarea,
-form select {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border-radius: 2rem;
-    border: none;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    background: #fff;
-    box-shadow: 0 0 0 1px #ddd inset;
-}
-
-/* Bigger textarea */
-form textarea {
-    min-height: 120px;
-    border-radius: 1rem;
-}
-
-/* Submit button */
-form button,
-form input[type="submit"] {
-    background: var(--wp--preset--color--yellow, #fdbb30);
-    color: #fff;
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-form button:hover,
-form input[type="submit"]:hover {
-    background: #e5a420;
-}
-
+/* Arrow itself */
+.editor-styles-wrapper .is-style-leading-arrow::before,
 .is-style-leading-arrow::before {
     content: "\f061";
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 6 Free", "Font Awesome 5 Free";
     font-weight: 900;
     display: inline-block;
     margin-right: 0.6em;
-
-    font-size: inherit;
-    line-height: inherit;
-    color: var(--arrow-color, currentColor);
-    /* default = text color */
-}
-
-.wp-block-group.is-layout-constrained>*+* {
-    margin-top: var(--wp--style--block-gap, 1.5rem);
-}
-
-/* ==========================================================
-   BK Newsletter Footer — Standalone version
-   ========================================================== */
-
-.bk-newsletter-footer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
-
-    gap: 0.5rem;
-    box-sizing: border-box;
-    margin-top: 2rem;
-}
-
-/* Input field */
-.bk-newsletter-footer input[type="email"] {
-    flex: 1;
-    border: none;
-    padding: 1rem 1.25rem;
-    font-size: 1rem;
-    border-radius: 999px;
-    outline: none;
-    color: var(--wp--preset--color--primary, #0b5c6b);
-    background: #fff;
-    box-sizing: border-box;
-    margin-bottom: 0;
-}
-
-.bk-newsletter-footer input[type="email"]::placeholder {
-    color: var(--wp--preset--color--primary, #0b5c6b);
-    opacity: 0.6;
-}
-
-/* Button */
-.bk-newsletter-footer button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-
-    border: none;
-    border-radius: 999px;
-    background: var(--wp--preset--color--dark-blue, #0b5c6b);
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 1rem 2rem;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.15s ease;
-    position: relative;
-    margin-left: -3rem;
-    /* slight overlap with input */
-    z-index: 1;
-}
-
-.bk-newsletter-footer button:hover {
-    background: var(--wp--preset--color--accent-dark, #e09a15);
-    transform: translateY(-2px);
-}
-
-/* Icon inside button */
-.bk-newsletter-footer i {
-    margin-left: 0.5rem;
-    font-size: 1rem;
-    color: white;
-}
-
-/* ==========================================================
-   Responsive adjustments
-   ========================================================== */
-
-@media (max-width: 800px) {
-    .bk-newsletter-footer {
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 600px) {
-    .bk-newsletter-footer {
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: stretch;
-    }
-
-    .bk-newsletter-footer input[type="email"] {
-        border-radius: 999px;
-        margin: 0;
-    }
-
-    .bk-newsletter-footer button {
-        margin-left: 0;
-        border-radius: 999px;
-        width: 100%;
-        transform: none;
-    }
+    color: var(--arrow-color, var(--wp--style--color--text, currentColor)) !important;
+    font-style: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
 }

@@ -1,37 +1,12 @@
-/* ==========================================================
-   Footer Newsletter — isolated from WP layout flow
-   ========================================================== */
-
-/* Scope everything to the footer to avoid global bleed */
-footer .bk-newsletter,
-footer .bk-newsletter-footer {
+.bk-newsletter {
+    display: flex;
+    align-items: center;
     width: 100%;
     max-width: 600px;
-    margin: 0 auto;
     position: relative;
 }
 
-/* Inner flex layout to keep input + button side by side */
-footer .bk-newsletter,
-footer .bk-newsletter-footer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0.5rem;
-    box-sizing: border-box;
-}
-
-/* Make sure any WP layout wrapper can’t override our flex row */
-footer .is-layout-flow>.bk-newsletter,
-footer .is-layout-flow>.bk-newsletter-footer {
-    display: flex !important;
-    flex-direction: row !important;
-}
-
-/* Input field */
-footer .bk-newsletter input[type="email"],
-footer .bk-newsletter-footer input[type="email"] {
+.bk-newsletter input[type="email"] {
     flex: 1;
     border: none;
     padding: 1rem 1.25rem;
@@ -39,20 +14,25 @@ footer .bk-newsletter-footer input[type="email"] {
     outline: none;
     border-radius: 999px;
     color: var(--wp--preset--color--primary, #0b5c6b);
+    /* full pill shape */
     background: #fff;
     margin-bottom: 0;
-    box-sizing: border-box;
 }
 
-footer .bk-newsletter input[type="email"]::placeholder,
-footer .bk-newsletter-footer input[type="email"]::placeholder {
+.bk-newsletter input[type="email"]::placeholder {
     color: var(--wp--preset--color--primary, #0b5c6b);
     opacity: 0.6;
+    /* optional: softens the color */
 }
 
-/* Button */
-footer .bk-newsletter button,
-footer .bk-newsletter-footer button {
+
+.bk-newsletter button {
+    position: relative;
+    margin-left: -2.2rem;
+    /* overlap the input slightly */
+    z-index: 1;
+    /* sit on top of the input */
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,54 +40,63 @@ footer .bk-newsletter-footer button {
 
     border: none;
     border-radius: 999px;
-    background: var(--wp--preset--color--accent, #f6a623);
-    color: var(--wp--preset--color--dark-blue, #0b5c6b);
+    /* full pill shape */
+    background: var(--wp--preset--color--primary, #0b5c6b);
+    color: #fff;
     font-weight: 600;
     font-size: 1rem;
     padding: 1rem 2rem;
     white-space: nowrap;
     cursor: pointer;
-    transition: background 0.2s, transform 0.15s ease;
+    transition: background 0.2s;
 }
 
-footer .bk-newsletter button:hover,
-footer .bk-newsletter-footer button:hover {
-    background: var(--wp--preset--color--accent-dark, #e09a15);
-    transform: translateY(-2px);
+.bk-newsletter button:hover {
+    background: var(--wp--preset--color--primary-dark, #08424d);
 }
 
-/* Icon */
-footer .bk-newsletter i,
-footer .bk-newsletter-footer i {
+.bk-newsletter i {
+    color: var(--wp--preset--color--accent, #f6a623);
+    font-size: 1rem;
+}
+
+.bk-newsletter i {
     margin-left: 0.5rem;
     font-size: 1rem;
-    color: var(--wp--preset--color--dark-blue, #0b5c6b);
+    color: var(--wp--preset--color--accent, #f6a623);
 }
 
-/* ==========================================================
-   Responsive adjustments
-   ========================================================== */
+/* Force the newsletter to behave like a row on desktop */
+.bk-newsletter,
+.wp-block-group.is-layout-flow .bk-newsletter {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+}
+
 
 @media (max-width: 600px) {
-
-    footer .bk-newsletter,
-    footer .bk-newsletter-footer {
+    .bk-newsletter {
         flex-direction: column;
         gap: 0.75rem;
         align-items: stretch;
     }
 
-    footer .bk-newsletter input[type="email"],
-    footer .bk-newsletter-footer input[type="email"] {
+    .bk-newsletter input[type="email"] {
         border-radius: 999px;
+        /* full pill */
         margin: 0;
     }
 
-    footer .bk-newsletter button,
-    footer .bk-newsletter-footer button {
+    .bk-newsletter button {
         margin-left: 0;
+        /* remove overlap */
         border-radius: 999px;
+        /* full pill */
         width: 100%;
-        transform: none;
     }
 }
