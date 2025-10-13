@@ -4,9 +4,10 @@
   "title": "Blog Posts",
   "category": "widgets",
   "icon": "list-view",
-  "description": "Displays a grid of blog posts.",
-  "editorScript": "file:./index.js",
-  "style": "file:./style.css",
+  "description": "Displays recent blog posts in a grid with images and dates.",
+  "style": "file:style.css",
+  "editorScript": "file:index.js",
+  "render": "file:render.php",
   "supports": {
     "html": false
   }

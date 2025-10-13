@@ -8,9 +8,16 @@
   "attributes": {
     "text": { "type": "string", "default": "Zin in een kennismaking?" },
     "url": { "type": "string", "default": "" },
-    "bgColor": { "type": "string", "default": "var(--wp--preset--color--yellow)" },
+    "backgroundColor": { "type": "string", "default": "var(--wp--preset--color--yellow)" },
     "textColor": { "type": "string", "default": "var(--wp--preset--color--dark-blue)" },
-    "arrowColor": { "type": "string", "default": "var(--wp--preset--color--dark-blue)" }
+    "arrowColor": { "type": "string", "default": "var(--wp--preset--color--dark-blue)" },
+    "paddingSize": { "type": "string", "default": "normal" },
+    "overlapEnabled": { "type": "boolean", "default": false },
+    "offsetX": { "type": "number", "default": 0 },
+    "offsetY": { "type": "number", "default": 0 }
+  },
+  "supports": {
+    "spacing": { "margin": ["top", "right", "bottom", "left"] }
   },
   "editorScript": "file:./index.js",
   "editorStyle": "file:./editor.css",

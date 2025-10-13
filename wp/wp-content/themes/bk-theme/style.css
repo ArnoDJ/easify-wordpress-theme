@@ -126,3 +126,11 @@ body {
 .wp-block-bk-theme-content-bubble>.wp-block-group.is-layout-flex {
     gap: var(--wp--style--block-gap, 1.5rem);
 }
+
+body,
+button,
+input,
+select,
+textarea {
+    font-family: 'Saira', sans-serif !important;
+}

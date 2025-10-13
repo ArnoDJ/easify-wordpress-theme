@@ -135,17 +135,9 @@ add_action('init', function () {
 	register_block_type(__DIR__ . '/blocks/icon-description');
 	register_block_type(__DIR__ . '/blocks/pill-button');
 	register_block_type(__DIR__ . '/blocks/side-image-content-block');
+	register_block_type(__DIR__ . '/blocks/blog-posts');
 });
 
-// =======================================================
-// BLOG POSTS BLOCK (Dynamic)
-// =======================================================
-function bk_theme_register_blog_posts_block() {
-	register_block_type(__DIR__ . '/blocks/blog-posts', [
-		'render_callback' => 'bk_theme_render_blog_posts_block',
-	]);
-}
-add_action('init', 'bk_theme_register_blog_posts_block');
 
 function bk_theme_render_blog_posts_block($attributes) {
 	$query = new WP_Query([
@@ -294,3 +286,14 @@ add_action('enqueue_block_editor_assets', function () {
         filemtime(get_stylesheet_directory() . '/assets/css/editor-arrow.css')
     );
 });
+
+add_action('wp_print_scripts', function() {
+    global $wp_scripts;
+    foreach ($wp_scripts->queue as $handle) {
+        $src = $wp_scripts->registered[$handle]->src ?? '';
+        if (strpos($src, 'react') !== false) {
+            error_log("⚠️ React script detected: $handle => $src");
+        }
+    }
+});
+

@@ -1,17 +1,87 @@
+/* ==========================================================
+   BLOG POSTS GRID
+   ========================================================== */
 .bk-blog-grid {
-    display: flex;
-    flex-direction: column;
-    /* stack posts */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
-    /* spacing between posts */
     width: 100%;
 }
 
-.bk-blog-grid article {
-    width: 100%;
-    /* take full width */
+@media (max-width: 1024px) {
+    .bk-blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .bk-blog-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================
+   BLOG CARD
+   ========================================================== */
+.bk-blog-card {
     background: #fff;
-    padding: 1.5rem;
     border-radius: 12px;
+    overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bk-blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.bk-blog-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* ==========================================================
+   IMAGE
+   ========================================================== */
+.bk-blog-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+/* ==========================================================
+   CONTENT
+   ========================================================== */
+.bk-blog-content {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.bk-blog-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--wp--preset--color--dark-blue);
+    ;
+}
+
+.bk-blog-date {
+    font-size: 0.9rem;
+    color: var(--wp--preset--color--dark-blue);
+    margin-bottom: 0.25rem;
+}
+
+.bk-blog-excerpt {
+    font-size: 1rem;
+    color: #444;
+    margin: 0;
+    flex-grow: 1;
 }
