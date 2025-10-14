@@ -199,3 +199,62 @@ h3.wp-block-heading.is-style-hero-title {
 .is-style-leading-arrow.has-text-color::before {
     color: var(--wp--style--color--text, currentColor);
 }
+
+/* =====================================
+   Quote block redesign with author
+   ===================================== */
+.wp-block-quote {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 900px;
+    text-align: center;
+    color: #164b5f;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    line-height: 1.5;
+    font-family: 'Barlow', sans-serif;
+    position: relative;
+}
+
+.wp-block-quote p {
+    margin: 0;
+}
+
+.wp-block-quote p::before {
+    content: "“";
+    font-size: 2.5em;
+    line-height: 0;
+    vertical-align: -0.4em;
+    margin-right: 0.1em;
+    color: #164b5f;
+}
+
+.wp-block-quote p::after {
+    content: "”";
+    font-size: 2.5em;
+    line-height: 0;
+    vertical-align: -0.4em;
+    margin-left: 0.1em;
+    color: #164b5f;
+}
+
+/* Author (cite) styling */
+.wp-block-quote cite,
+.wp-block-quote footer {
+    display: block;
+    margin-top: 1.5em;
+    font-style: normal;
+    font-weight: 500;
+    color: #8bb9d6;
+    font-size: 1.3rem;
+    text-align: left;
+    margin-left: 4rem;
+}
+
+/* Remove weird italics/quotation inheritance */
+.wp-block-quote cite em,
+.wp-block-quote cite i {
+    font-style: normal;
+}
