@@ -136,6 +136,7 @@ add_action('init', function () {
 	register_block_type(__DIR__ . '/blocks/pill-button');
 	register_block_type(__DIR__ . '/blocks/side-image-content-block');
 	register_block_type(__DIR__ . '/blocks/blog-posts');
+	register_block_type(__DIR__ . '/blocks/review-carousel');
 });
 
 
@@ -296,4 +297,77 @@ add_action('wp_print_scripts', function() {
         }
     }
 });
+
+function bk_enqueue_swiper_assets() {
+  // Swiper CSS
+  wp_enqueue_style(
+    'swiper',
+    'https://unpkg.com/swiper/swiper-bundle.min.css',
+    [],
+    null
+  );
+
+  // Swiper JS
+  wp_enqueue_script(
+    'swiper',
+    'https://unpkg.com/swiper/swiper-bundle.min.js',
+    [],
+    null,
+    true
+  );
+}
+add_action('wp_enqueue_scripts', 'bk_enqueue_swiper_assets');
+
+/**
+ * Ensure review-carousel styles load AFTER Swiper to hide default arrows
+ */
+add_action('wp_enqueue_scripts', function () {
+    // Path setup
+    $path = get_stylesheet_directory() . '/blocks/review-carousel/style.css';
+    $uri  = get_stylesheet_directory_uri() . '/blocks/review-carousel/style.css';
+
+    // Only enqueue if it exists
+    if (file_exists($path)) {
+        wp_enqueue_style(
+            'bk-review-carousel-style',
+            $uri,
+            ['swiper'], // <-- makes sure it loads AFTER Swiper
+            filemtime($path)
+        );
+    }
+
+    // Nuclear CSS fix for Swiper arrow duplication
+    wp_add_inline_style('bk-review-carousel-style', '
+        .swiper-button-next::after,
+        .swiper-button-prev::after,
+        .bk-review-carousel .swiper-button-next::after,
+        .bk-review-carousel .swiper-button-prev::after {
+            content: none !important;
+            display: none !important;
+            background: none !important;
+            mask: none !important;
+            -webkit-mask: none !important;
+        }
+    ');
+}, 110);
+
+add_action('wp_footer', function () { ?>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Remove Swiper's default inline SVG arrows (used in Swiper 10+)
+      const cleanUpArrows = () => {
+        document.querySelectorAll('.swiper-button-prev svg, .swiper-button-next svg')
+          .forEach(svg => svg.remove());
+      };
+
+      // Run once on load
+      cleanUpArrows();
+
+      // Observe DOM changes (Swiper may re-inject SVGs)
+      const observer = new MutationObserver(cleanUpArrows);
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
+  </script>
+<?php });
+
 

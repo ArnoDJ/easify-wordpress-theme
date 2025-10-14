@@ -1,0 +1,233 @@
+/* === Base Carousel Container === */
+.bk-review-carousel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #e8f3f8;
+    border-radius: 16px;
+    padding: 3rem 1rem 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 650px;
+    /* Final height */
+    box-sizing: border-box;
+    margin: 0;
+    max-width: none;
+}
+
+/* === Title === */
+.bk-review-carousel-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #0E5E77;
+    margin-bottom: 2.5rem;
+    font-family: 'Saira', sans-serif;
+}
+
+/* === Swiper Container === */
+.bk-review-carousel .swiper {
+    display: flex;
+    align-items: flex-end;
+    /* Slight upward logo bias */
+    justify-content: center;
+    height: 100%;
+    padding-bottom: 160px;
+    /* Reserve space for text */
+    box-sizing: border-box;
+    transition: height 0.4s ease;
+    overflow: visible;
+    min-height: 350px;
+}
+
+/* === Swiper Slides === */
+.swiper-slide {
+    width: 280px !important;
+    flex-shrink: 0;
+    opacity: 0.8;
+    transform: scale(0.9);
+    transition: transform 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 1;
+    height: 100% !important;
+}
+
+.swiper-slide-active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 5;
+}
+
+/* === Logo Styling === */
+.bk-carousel-logo-wrapper {
+    margin-bottom: 1.5rem;
+}
+
+.bk-carousel-logo img {
+    max-height: 120px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.swiper-slide-active .bk-carousel-logo img {
+    transform: scale(1.05);
+}
+
+/* === Review Content === */
+.bk-carousel-content {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 900px;
+    text-align: center;
+    /* Final height for review text area */
+    padding: 1rem;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bk-carousel-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.bk-carousel-content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+}
+
+/* === Review Text === */
+.bk-review-text {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 1rem;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0;
+    transform: translateY(10px);
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bk-review-author {
+    font-size: 1rem;
+    color: #0E5E77;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.bk-review-text.show,
+.bk-review-author.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.bk-review-author strong {
+    font-weight: 600;
+    color: #000;
+}
+
+/* === Navigation Buttons === */
+.bk-review-carousel .swiper-button-next,
+.bk-review-carousel .swiper-button-prev {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--wp--preset--color--dark-blue, #135a70);
+    background: var(--wp--preset--color--dark-blue, #135a70);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+}
+
+.bk-review-carousel .swiper-button-next:hover,
+.bk-review-carousel .swiper-button-prev:hover {
+    background: var(--wp--preset--color--dark-blue, #135a70);
+    border-color: var(--wp--preset--color--dark-blue, #135a70);
+    box-shadow: 0 4px 10px rgba(0, 115, 177, 0.3);
+}
+
+.bk-review-carousel .swiper-button-next:active,
+.bk-review-carousel .swiper-button-prev:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.bk-review-carousel .swiper-button-next i,
+.bk-review-carousel .swiper-button-prev i {
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.bk-review-carousel .swiper-button-next:hover i {
+    transform: translateX(2px);
+}
+
+.bk-review-carousel .swiper-button-prev:hover i {
+    transform: translateX(-2px);
+}
+
+.bk-review-carousel .swiper-button-prev,
+.bk-review-carousel .swiper-button-next,
+.bk-review-carousel .swiper-button-disabled {
+    opacity: 1 !important;
+    pointer-events: all !important;
+}
+
+.bk-review-carousel .swiper-button-next::after,
+.bk-review-carousel .swiper-button-prev::after {
+    display: none !important;
+    content: none !important;
+}
+
+@media (max-width: 768px) {
+    .bk-review-text {
+        -webkit-line-clamp: unset;
+        display: block;
+        overflow: visible;
+        text-overflow: unset;
+    }
+
+    .bk-review-carousel {
+        height: auto;
+        padding-bottom: 4rem;
+    }
+
+    .bk-carousel-content {
+        position: static;
+        transform: none;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .bk-review-carousel .swiper {
+        align-items: center;
+        padding-bottom: 0;
+    }
+}

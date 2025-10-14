@@ -1,0 +1,191 @@
+.bk-review-carousel {
+    position: relative;
+    background: var(--wp--preset--color--very-light-blue, #e8f3f8);
+    text-align: center;
+    border-radius: 16px;
+    padding: 4rem 2rem;
+    overflow: hidden;
+}
+
+/* LOGO STRIP */
+.bk-carousel-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+}
+
+.bk-carousel-logo {
+    opacity: 0.4;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transform: scale(1);
+}
+
+.bk-carousel-logo.active {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.bk-carousel-logo img {
+    max-height: 90px;
+    /* was 60px */
+    width: auto;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* TESTIMONIAL TEXT */
+.bk-carousel-text {
+    display: none;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.bk-carousel-text.active {
+    display: block;
+}
+
+.bk-review-text {
+    color: var(--wp--preset--color--dark-gray, #636363);
+}
+
+.bk-review-author {
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--wp--preset--color--dark-blue, #135a70);
+}
+
+/* ARROWS */
+.bk-carousel-arrow {
+    background: var(--wp--preset--color--dark-blue, #135a70);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: 50%;
+    /* true vertical centering */
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.bk-carousel-arrow:hover {
+    background: var(--wp--preset--color--medium-blue, #6fa8be);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.bk-carousel-arrow.prev {
+    left: 1.5rem;
+}
+
+.bk-carousel-arrow.next {
+    right: 1.5rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .bk-carousel-logos {
+        gap: 2rem;
+    }
+
+    .bk-carousel-logo img {
+        max-height: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bk-carousel-logos {
+        gap: 1.5rem;
+    }
+
+    .bk-carousel-logo img {
+        max-height: 50px;
+    }
+
+    .bk-carousel-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    .bk-carousel-arrow.prev {
+        left: 0.5rem;
+    }
+
+    .bk-carousel-arrow.next {
+        right: 0.5rem;
+    }
+}
+
+.bk-carousel-slide.animate {
+    opacity: 1;
+}
+
+.bk-carousel-slide.slide-next {
+    transform: translateX(40px);
+}
+
+.bk-carousel-slide.slide-next.animate {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.bk-carousel-slide.slide-prev {
+    transform: translateX(-40px);
+}
+
+.bk-carousel-slide.slide-prev.animate {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.bk-carousel-logo {
+    opacity: 0.3;
+    transition: all 0.4s ease;
+    flex: 0 0 auto;
+}
+
+.bk-carousel-logo.active {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.bk-review-carousel-editor {
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    padding: 2rem;
+    background: #f9fbfc;
+}
+
+.bk-review-carousel-editor .bk-review-item-editor {
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.bk-review-carousel-editor .bk-upload-btn img {
+    display: block;
+    max-height: 60px;
+    margin-bottom: 0.5rem;
+}
+
+.bk-review-carousel-editor .components-button.is-destructive {
+    color: #b32d2e;
+}
+
+.bk-review-carousel-editor .components-button.is-primary {
+    margin-top: 1rem;
+}
