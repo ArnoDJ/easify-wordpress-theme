@@ -128,6 +128,8 @@ if ($configExtra = getenv_docker('WORDPRESS_CONFIG_EXTRA', '')) {
 	eval($configExtra);
 }
 define('FS_METHOD', 'direct');
+define( 'WP_HOME', 'http://91.98.200.107:18080' );
+define( 'WP_SITEURL', 'http://91.98.200.107:18080' );
 
 /* That's all, stop editing! Happy publishing. */
 
