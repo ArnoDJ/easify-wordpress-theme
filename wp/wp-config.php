@@ -127,6 +127,7 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strpos($_SERVER['HTTP_X_FORWARD
 if ($configExtra = getenv_docker('WORDPRESS_CONFIG_EXTRA', '')) {
 	eval($configExtra);
 }
+define('FS_METHOD', 'direct');
 
 /* That's all, stop editing! Happy publishing. */
 
